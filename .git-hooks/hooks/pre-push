@@ -39,15 +39,19 @@ printf "\n%s\n" "Checking coverage..."
 
 if [ -f coverage.out ]; then
     total_cov=$(go tool cover -func=coverage.out | grep total | awk '{print substr($3, 1, length($3)-1)}')
-    total_cov_int=$(printf "%.0f" "$total_cov")  # Convert to integer
+    total_cov_int=$(printf "%.0f" "$total_cov")
 
-    # Minimum required coverage
     min_cov=100
 
     printf "Total coverage: %s%% (required: %s%%)\n" "$total_cov" "$min_cov"
 
     if [ "$total_cov_int" -lt "$min_cov" ]; then
-        printf "\n%s\n\n" "Code coverage test failed."
+        printf "\n%s\n" "Code coverage test failed."
+
+        printf "\n%s\n" "Uncovered lines:"
+        awk '$3 == 0 {print $1 " (" $2 ") — NOT COVERED"}' coverage.out
+        printf "\n"
+
         coverage_status=1
     else
         printf "\n%s\n\n" "Code coverage test successful."
@@ -58,8 +62,6 @@ else
     coverage_status=1
 fi
 
-
-# Determine exit status
 hook_status=0
 
 if [ "$test_status" -ne 0 ]; then
