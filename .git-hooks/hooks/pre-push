@@ -1,0 +1,79 @@
+#!/bin/sh
+
+printf "\n%s\n" "Pre-push hook activated."
+
+printf "\n%s\n" "Running gofmt..."
+unformatted=$(gofmt -w .)
+
+if [ -n "$unformatted" ]; then
+    printf "%s\n" "These files are not gofmt-formatted:"
+    printf "%s\n" "$unformatted"
+    printf "\n%s\n" "Please run: gofmt -w ."
+    exit 1
+else
+    printf "%s\n" "All files are properly formatted."
+fi
+
+
+printf "\n%s\n" "Running golangci-lint..."
+if command -v golangci-lint >/dev/null 2>&1; then
+    golangci-lint run
+    lint_status=$?
+else
+    printf "%s\n" "golangci-lint not installed. Skipping linting."
+    lint_status=0
+fi
+
+
+printf "\n%s\n" "Executing tests..."
+start_tests=$(date +%s)
+
+go test ./... -coverprofile=coverage.out
+test_status=$?
+
+end_tests=$(date +%s)
+printf "\nTesting completed in %s seconds.\n" "$(($end_tests-$start_tests))"
+
+
+printf "\n%s\n" "Checking coverage..."
+
+if [ -f coverage.out ]; then
+    total_cov=$(go tool cover -func=coverage.out | grep total | awk '{print substr($3, 1, length($3)-1)}')
+    total_cov_int=$(printf "%.0f" "$total_cov")  # Convert to integer
+
+    # Minimum required coverage
+    min_cov=100
+
+    printf "Total coverage: %s%% (required: %s%%)\n" "$total_cov" "$min_cov"
+
+    if [ "$total_cov_int" -lt "$min_cov" ]; then
+        printf "\n%s\n\n" "Code coverage test failed."
+        coverage_status=1
+    else
+        printf "\n%s\n\n" "Code coverage test successful."
+        coverage_status=0
+    fi
+else
+    printf "%s\n" "coverage.out missing. Cannot evaluate coverage."
+    coverage_status=1
+fi
+
+
+# Determine exit status
+hook_status=0
+
+if [ "$test_status" -ne 0 ]; then
+    hook_status=$test_status
+    printf "%s\n" "There are failed tests."
+fi
+
+if [ "$coverage_status" -ne 0 ]; then
+    hook_status=$coverage_status
+fi
+
+if [ "$lint_status" -ne 0 ]; then
+    hook_status=$lint_status
+    printf "%s\n" "Linting errors found."
+fi
+
+exit $hook_status
