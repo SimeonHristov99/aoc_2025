@@ -78,4 +78,5 @@ if [ "$lint_status" -ne 0 ]; then
     printf "%s\n" "Linting errors found."
 fi
 
+rm coverage.out
 exit $hook_status
