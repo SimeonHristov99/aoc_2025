@@ -1,5 +1,7 @@
 package main
 
+import "flag"
+
 type Config struct {
 	Day   int
 	Part  int
@@ -7,11 +9,13 @@ type Config struct {
 }
 
 func ParseArgs(args []string) Config {
-	return Config{
-		Day:   1,
-		Part:  1,
-		Input: "internal/day01/part01/input.txt",
-	}
+	var config Config
+	fs := flag.NewFlagSet("aoc_2025", flag.PanicOnError)
+	fs.IntVar(&config.Day, "day", 1, "which day to run")
+	fs.IntVar(&config.Part, "part", 1, "which part to run")
+	fs.StringVar(&config.Input, "input", "internal/day01/part01/input.txt", "path to input file")
+	fs.Parse(args)
+	return config
 }
 
 func main() {
