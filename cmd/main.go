@@ -3,8 +3,9 @@ package main
 import (
 	"flag"
 	"fmt"
-	"github.com/SimeonHristov99/aoc_2025/internal/day01"
 	"os"
+
+	"github.com/SimeonHristov99/aoc_2025/internal/day01"
 )
 
 type Config struct {
@@ -12,6 +13,8 @@ type Config struct {
 	Part  int
 	Input string
 }
+
+type Solver func() int
 
 func ParseArgs(args []string) (Config, error) {
 	var config Config
@@ -26,7 +29,12 @@ func ParseArgs(args []string) (Config, error) {
 }
 
 func main() {
+	solvers := map[int]map[int]Solver{
+		1: {
+			1: day01.SolvePart1,
+		},
+	}
 	config, _ := ParseArgs(os.Args[1:])
-	result := day01.SolvePart1()
+	result := solvers[config.Day][config.Part]()
 	fmt.Printf("Day %d, Part=%d, Input='%s': %d\n", config.Day, config.Part, config.Input, result)
 }
