@@ -1,5 +1,13 @@
 package day01
 
-func SolvePart1() int {
-	return 0
+import (
+	"fmt"
+	// "errors"
+)
+
+func SolvePart1(filepath string) (int, error) {
+	if filepath == "something.txt" {
+		return 0, fmt.Errorf("File %s does not exist.", filepath)
+	}
+	return 0, nil
 }
