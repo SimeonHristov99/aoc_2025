@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"strings"
 	"testing"
 )
 
@@ -13,11 +14,15 @@ func TestParseArgs(t *testing.T) {
 			Part:  1,
 			Input: "internal/day01/part01/input.txt",
 		}
+		var expectedErr error = nil
 
 		// Act
-		actual := ParseArgs([]string{})
+		actual, actualErr := ParseArgs([]string{})
 
 		// Assert
+		if actualErr != expectedErr {
+			t.Fatalf("\nexpected=\n%#v\nactual=\n%#v\n", expectedErr, actualErr)
+		}
 		if actual != expected {
 			t.Fatalf("\nexpected=\n%#v\nactual=\n%#v\n", expected, actual)
 		}
@@ -34,15 +39,19 @@ func TestParseArgs(t *testing.T) {
 			Part:  part,
 			Input: input,
 		}
+		var expectedErr error = nil
 
 		// Act
-		actual := ParseArgs([]string{
+		actual, actualErr := ParseArgs([]string{
 			fmt.Sprintf("-day=%d", day),
 			fmt.Sprintf("-part=%d", part),
 			fmt.Sprintf("-input=%s", input),
 		})
 
 		// Assert
+		if actualErr != expectedErr {
+			t.Fatalf("\nexpected=\n%#v\nactual=\n%#v\n", expectedErr, actualErr)
+		}
 		if actual != expected {
 			t.Fatalf("\nexpected=\n%#v\nactual=\n%#v\n", expected, actual)
 		}
