@@ -47,4 +47,33 @@ func TestParseArgs(t *testing.T) {
 			t.Fatalf("\nexpected=\n%#v\nactual=\n%#v\n", expected, actual)
 		}
 	})
+
+	t.Run("when parse errors then returns error message", func(t *testing.T) {
+		// Arrange
+		day := 12
+		part := "something"
+		input := "tmp1.txt"
+
+		expectedConfig := Config{}
+		expectedErrorMessage := "invalid value \"something\" for flag -part: parse error"
+
+		// Act
+		actualConfig, err := ParseArgs([]string{
+			fmt.Sprintf("-day=%d", day),
+			fmt.Sprintf("-part=%s", part),
+			fmt.Sprintf("-input=%s", input),
+		})
+		actualErrorMessage := err.Error()
+
+		// Assert
+		if actualConfig != expectedConfig {
+			t.Fatalf("\nexpected=\n%#v\nactual=\n%#v\n", expectedConfig, actualConfig)
+		}
+		if !strings.Contains(actualErrorMessage, expectedErrorMessage) {
+			t.Fatalf("\nexpected=\n%#v\nactual=\n%#v\n", expectedErrorMessage, actualErrorMessage)
+		}
+	})
+
+	// t.Run("when some arguments passed then they are parsed and remaining are default", func(t *testing.T) {
+
 }
