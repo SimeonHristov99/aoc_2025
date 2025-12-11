@@ -16,7 +16,7 @@ func TestParseArgs(t *testing.T) {
 
 		// Assert
 		if actual != expected {
-			t.Fatalf("expected=\n%#v\nactual=\n%#v\n", expected, actual)
+			t.Fatalf("\nexpected=\n%#v\nactual=\n%#v\n", actual, expected)
 		}
 	})
 }
