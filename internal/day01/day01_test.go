@@ -1,8 +1,8 @@
 package day01
 
 import (
-	"testing"
 	"fmt"
+	"testing"
 )
 
 func TestSolvePart1(t *testing.T) {
