@@ -4,5 +4,5 @@ Learning Go this year.
 
 ## Next steps
 
-- [ ] Add functionality to parse program arguments for the `day`, `part`, and `input` file path.
+- [X] Add functionality to parse program arguments for the `day`, `part`, and `input` file path.
 - [ ] Solve day 1.
