@@ -28,7 +28,7 @@ func TestSolvePart1(t *testing.T) {
 		// Arrange
 		file := "something.txt"
 		expected := 0
-		expectedError := fmt.Sprintf("File %s does not exist.", file)
+		expectedError := fmt.Sprintf("file %s does not exist", file)
 
 		// Act
 		actual, err := SolvePart1(file)
