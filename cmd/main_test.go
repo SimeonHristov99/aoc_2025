@@ -57,6 +57,31 @@ func TestParseArgs(t *testing.T) {
 		}
 	})
 
+	t.Run("when some arguments passed then they are parsed and remaining are default", func(t *testing.T) {
+		// Arrange
+		input := "tmp1.txt"
+
+		expected := Config{
+			Day:   1,
+			Part:  1,
+			Input: input,
+		}
+		var expectedErr error = nil
+
+		// Act
+		actual, actualErr := ParseArgs([]string{
+			fmt.Sprintf("-input=%s", input),
+		})
+
+		// Assert
+		if actualErr != expectedErr {
+			t.Fatalf("\nexpected=\n%#v\nactual=\n%#v\n", expectedErr, actualErr)
+		}
+		if actual != expected {
+			t.Fatalf("\nexpected=\n%#v\nactual=\n%#v\n", expected, actual)
+		}
+	})
+
 	t.Run("when parse errors then returns error message", func(t *testing.T) {
 		// Arrange
 		day := 12
@@ -82,7 +107,4 @@ func TestParseArgs(t *testing.T) {
 			t.Fatalf("\nexpected=\n%#v\nactual=\n%#v\n", expectedErrorMessage, actualErrorMessage)
 		}
 	})
-
-	// t.Run("when some arguments passed then they are parsed and remaining are default", func(t *testing.T) {
-
 }
