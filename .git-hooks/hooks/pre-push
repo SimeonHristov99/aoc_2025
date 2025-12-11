@@ -54,7 +54,6 @@ if [ -f coverage.out ]; then
 
         coverage_status=1
     else
-        printf "\n%s\n\n" "Code coverage test successful."
         coverage_status=0
     fi
 else
@@ -79,4 +78,5 @@ if [ "$lint_status" -ne 0 ]; then
 fi
 
 rm coverage.out
+printf "Success! No errors found!"
 exit $hook_status
