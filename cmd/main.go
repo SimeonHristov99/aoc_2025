@@ -1,6 +1,11 @@
 package main
 
-import "flag"
+import (
+	"flag"
+	"fmt"
+	"github.com/SimeonHristov99/aoc_2025/internal/day01"
+	"os"
+)
 
 type Config struct {
 	Day   int
@@ -21,6 +26,7 @@ func ParseArgs(args []string) (Config, error) {
 }
 
 func main() {
-	// Load configuration: day, part, input
-	// fmt.Println(solve(day=..., part=..., input=...)
+	config, _ := ParseArgs(os.Args[1:])
+	result := day01.SolvePart1()
+	fmt.Printf("Day %d, Part=%d, Input='%s': %d\n", config.Day, config.Part, config.Input, result)
 }

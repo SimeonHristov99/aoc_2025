@@ -8,7 +8,7 @@ func TestSolvePart1(t *testing.T) {
 		expected := 0
 
 		// Act
-		actual := solvePart1()
+		actual := SolvePart1()
 
 		// Assert
 		if actual != expected {

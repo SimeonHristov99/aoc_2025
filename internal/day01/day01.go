@@ -1,5 +1,5 @@
 package day01
 
-func solvePart1() int {
+func SolvePart1() int {
 	return 0
 }
