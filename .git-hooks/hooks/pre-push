@@ -61,6 +61,8 @@ else
     coverage_status=1
 fi
 
+rm coverage.out
+
 hook_status=0
 
 if [ "$test_status" -ne 0 ]; then
@@ -77,6 +79,8 @@ if [ "$lint_status" -ne 0 ]; then
     printf "%s\n" "Linting errors found."
 fi
 
-rm coverage.out
-printf "Success! No errors found!"
+if [ "$hook_status" -eq 0 ]; then
+    printf "Success! No errors found!"
+fi
+
 exit $hook_status
