@@ -1,6 +1,7 @@
 package main
 
 import (
+	"errors"
 	"flag"
 	"fmt"
 	"os"
@@ -35,6 +36,10 @@ func main() {
 		},
 	}
 	config, _ := ParseArgs(os.Args[1:])
+	if _, err := os.Stat(config.Input); errors.Is(err, os.ErrNotExist) {
+		fmt.Fprintf(os.Stderr, "file '%s' does not exist\n", config.Input)
+		return
+	}
 	result, _ := solvers[config.Day][config.Part](config.Input)
 	fmt.Printf("Day %d, Part=%d, Input='%s': %d\n", config.Day, config.Part, config.Input, result)
 }
