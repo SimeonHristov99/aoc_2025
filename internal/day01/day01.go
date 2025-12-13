@@ -11,7 +11,7 @@ func ParseInput(filename string) []string {
 	return strings.Split(strings.TrimSpace(string(contents)), "\n")
 }
 
-func ProcessSingle(input string) int {
+func RotationDiff(input string) int {
 	i, _ := strconv.Atoi(input[1:])
 	if input[0] == 'L' {
 		return -1 * i
@@ -24,7 +24,7 @@ func SolvePart1(filepath string) (int, error) {
 	entries := ParseInput(filepath)
 	position := 50
 	for _, n := range entries {
-		position = (position + ProcessSingle(n)) % 100
+		position = (position + RotationDiff(n)) % 100
 		if position < 0 {
 			position = 100 - position*(-1)
 		}

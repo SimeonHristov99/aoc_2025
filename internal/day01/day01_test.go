@@ -21,14 +21,14 @@ func TestParseInput(t *testing.T) {
 	})
 }
 
-func TestProcessSingle(t *testing.T) {
+func TestRotationDiff(t *testing.T) {
 	t.Run("when called with left and single digit then returns negative digit", func(t *testing.T) {
 		// Arrange
 		input := "L5"
 		expected := -5
 
 		// Act
-		actual := ProcessSingle(input)
+		actual := RotationDiff(input)
 
 		// Assert
 		if actual != expected {
@@ -42,7 +42,7 @@ func TestProcessSingle(t *testing.T) {
 		expected := -99
 
 		// Act
-		actual := ProcessSingle(input)
+		actual := RotationDiff(input)
 
 		// Assert
 		if actual != expected {
@@ -56,7 +56,7 @@ func TestProcessSingle(t *testing.T) {
 		expected := 60
 
 		// Act
-		actual := ProcessSingle(input)
+		actual := RotationDiff(input)
 
 		// Assert
 		if actual != expected {
