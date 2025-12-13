@@ -33,7 +33,7 @@ func TestParseArgs(t *testing.T) {
 		expected := Config{
 			Day:   1,
 			Part:  1,
-			Input: "internal/day01/part01/input.txt",
+			Input: "internal/day01/input.txt",
 		}
 		var expectedErr error = nil
 
