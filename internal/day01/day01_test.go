@@ -65,12 +65,47 @@ func TestRotationDiff(t *testing.T) {
 	})
 }
 
+func TestCountZeroIntersections(t *testing.T) {
+	t.Run("when passing zero times then returns 1", func(t *testing.T) {
+		// Arrange
+		current := 50
+		rotationDiff := 10
+		expected := 0
+
+		// Act
+		actual := CountZeroIntersections(current, rotationDiff)
+
+		// Assert
+		if actual != expected {
+			t.Fatalf("\nactual=\n%#v\nexpected=\n%#v\n", actual, expected)
+		}
+	})
+}
+
 func TestSolvePart1(t *testing.T) {
-	t.Run("when called with sample then returns three", func(t *testing.T) {
+	t.Run("when called with sample then returns part one result", func(t *testing.T) {
 		// Arrange
 		expected := 3
 		var expectedError error = nil
 		file := "sample.txt"
+
+		// Act
+		actual, actualError := SolvePart1(file)
+
+		// Assert
+		if actualError != expectedError {
+			t.Fatalf("\nactual=\n%#v\nexpected=\n%#v\n", actualError, expectedError)
+		}
+		if actual != expected {
+			t.Fatalf("\nactual=\n%#v\nexpected=\n%#v\n", actual, expected)
+		}
+	})
+
+	t.Run("when called with input then returns part two result", func(t *testing.T) {
+		// Arrange
+		expected := 980
+		var expectedError error = nil
+		file := "input.txt"
 
 		// Act
 		actual, actualError := SolvePart1(file)
