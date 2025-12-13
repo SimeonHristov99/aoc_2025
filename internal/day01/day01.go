@@ -21,7 +21,7 @@ func RotationDiff(input string) int {
 
 func CountZeroIntersections(current int, rotationDiff int) int {
 	newPosition := (current + rotationDiff) % 100
-	numIntersections := rotationDiff / 100
+	numIntersections := 0
 	if newPosition == 0 {
 		numIntersections += 1
 	}

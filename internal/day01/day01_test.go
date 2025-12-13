@@ -101,7 +101,7 @@ func TestSolvePart1(t *testing.T) {
 		}
 	})
 
-	t.Run("when called with input then returns part two result", func(t *testing.T) {
+	t.Run("when called with input then returns part one result", func(t *testing.T) {
 		// Arrange
 		expected := 980
 		var expectedError error = nil
