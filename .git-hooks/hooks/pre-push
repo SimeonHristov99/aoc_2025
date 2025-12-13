@@ -80,7 +80,7 @@ if [ "$lint_status" -ne 0 ]; then
 fi
 
 if [ "$hook_status" -eq 0 ]; then
-    printf "Success! No errors found!"
+    printf "%s\n" "Success! No errors found!"
 fi
 
 exit $hook_status
