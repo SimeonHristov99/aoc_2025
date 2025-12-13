@@ -136,7 +136,7 @@ func TestMain(t *testing.T) {
 		day := 1
 		part := 1
 		input := "../internal/day01/sample.txt"
-		result := 0
+		result := 3
 		expectedOutput := fmt.Sprintf("Day %d, Part=%d, Input='%s': %d\n", day, part, input, result)
 
 		initialArgs := os.Args
