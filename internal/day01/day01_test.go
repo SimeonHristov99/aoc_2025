@@ -66,11 +66,11 @@ func TestProcessSingle(t *testing.T) {
 }
 
 func TestSolvePart1(t *testing.T) {
-	t.Run("when called then returns 0", func(t *testing.T) {
+	t.Run("when called with sample then returns three", func(t *testing.T) {
 		// Arrange
-		expected := 0
+		expected := 3
 		var expectedError error = nil
-		file := "internal/day01/sample.txt"
+		file := "sample.txt"
 
 		// Act
 		actual, actualError := SolvePart1(file)
