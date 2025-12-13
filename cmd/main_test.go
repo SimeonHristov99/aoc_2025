@@ -8,16 +8,23 @@ import (
 	"testing"
 )
 
-func captureStdout(f func()) string {
-	r, w, _ := os.Pipe()
-	old := os.Stdout
-	os.Stdout = w
+func captureStdOutErr(f func()) (string, string) {
+	rStdOut, wStdOut, _ := os.Pipe()
+	rStdErr, wStdErr, _ := os.Pipe()
+	oldStdOut := os.Stdout
+	oldStdErr := os.Stderr
+	os.Stdout = wStdOut
+	os.Stderr = wStdErr
 	f()
-	_ = w.Close()
-	os.Stdout = old
-	b, _ := io.ReadAll(r)
-	_ = r.Close()
-	return string(b)
+	_ = wStdOut.Close()
+	_ = wStdErr.Close()
+	os.Stdout = oldStdOut
+	os.Stderr = oldStdErr
+	stdOut, _ := io.ReadAll(rStdOut)
+	stdErr, _ := io.ReadAll(rStdErr)
+	_ = rStdOut.Close()
+	_ = rStdErr.Close()
+	return string(stdOut), string(stdErr)
 }
 
 func TestParseArgs(t *testing.T) {
@@ -128,7 +135,7 @@ func TestMain(t *testing.T) {
 		// Arrange
 		day := 1
 		part := 1
-		input := "internal/day01/part01/input.txt"
+		input := "../internal/day01/sample.txt"
 		result := 0
 		expectedOutput := fmt.Sprintf("Day %d, Part=%d, Input='%s': %d\n", day, part, input, result)
 
@@ -137,11 +144,35 @@ func TestMain(t *testing.T) {
 		os.Args = []string{initialArgs[0], fmt.Sprintf("-day=%d", day), fmt.Sprintf("-part=%d", part), fmt.Sprintf("-input=%s", input)}
 
 		// Act
-		actualOutput := captureStdout(main)
+		actualOutput, _ := captureStdOutErr(main)
 
 		// Assert
 		if actualOutput != expectedOutput {
 			t.Fatalf("\nactual=\n%#v\nexpected=\n%#v\n", actualOutput, expectedOutput)
+		}
+	})
+
+	t.Run("when file does not exist then raise an error", func(t *testing.T) {
+		// Arrange
+		day := 1
+		part := 1
+		input := "something.txt"
+		expectedErrorMessage := fmt.Sprintf("file '%s' does not exist\n", input)
+		expectedStdOut := ""
+
+		initialArgs := os.Args
+		defer func() { os.Args = initialArgs }()
+		os.Args = []string{initialArgs[0], fmt.Sprintf("-day=%d", day), fmt.Sprintf("-part=%d", part), fmt.Sprintf("-input=%s", input)}
+
+		// Act
+		actualStdOut, actualStdErr := captureStdOutErr(main)
+
+		// Assert
+		if actualStdOut != expectedStdOut {
+			t.Fatalf("\nactual=\n%#v\nexpected=\n%#v\n", actualStdOut, expectedStdOut)
+		}
+		if !strings.Contains(actualStdErr, expectedErrorMessage) {
+			t.Fatalf("\nexpected=\n%#v\nactual=\n%#v\n", expectedErrorMessage, actualStdErr)
 		}
 	})
 }
