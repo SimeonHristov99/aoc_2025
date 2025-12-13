@@ -4,7 +4,10 @@ import "strconv"
 
 func ProcessSingle(input string) int {
 	i, _ := strconv.Atoi(input[1:])
-	return -1 * i
+	if input[0] == 'L' {
+		return -1 * i
+	}
+	return i
 }
 
 func SolvePart1(filepath string) (int, error) {
