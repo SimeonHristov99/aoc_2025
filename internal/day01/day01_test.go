@@ -30,6 +30,20 @@ func TestProcessSingle(t *testing.T) {
 			t.Fatalf("\nactual=\n%#v\nexpected=\n%#v\n", actual, expected)
 		}
 	})
+
+	t.Run("when called with right and number then returns positive number", func(t *testing.T) {
+		// Arrange
+		input := "R60"
+		expected := 60
+
+		// Act
+		actual := ProcessSingle(input)
+
+		// Assert
+		if actual != expected {
+			t.Fatalf("\nactual=\n%#v\nexpected=\n%#v\n", actual, expected)
+		}
+	})
 }
 
 func TestSolvePart1(t *testing.T) {
