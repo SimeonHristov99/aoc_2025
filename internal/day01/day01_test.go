@@ -15,7 +15,7 @@ func TestParseInput(t *testing.T) {
 		actual := ParseInput(filename)
 
 		// Assert
-		if reflect.DeepEqual(actual, expected) {
+		if !reflect.DeepEqual(actual, expected) {
 			t.Fatalf("\nactual=\n%#v\nexpected=\n%#v\n", actual, expected)
 		}
 	})
