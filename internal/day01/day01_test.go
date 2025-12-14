@@ -65,7 +65,7 @@ func TestRotationDiff(t *testing.T) {
 	})
 }
 
-func TestCountZeroIntersections(t *testing.T) {
+func TestCountZeroEndpoints(t *testing.T) {
 	t.Run("when passing zero times then returns 1", func(t *testing.T) {
 		// Arrange
 		current := 50
@@ -73,7 +73,7 @@ func TestCountZeroIntersections(t *testing.T) {
 		expected := 0
 
 		// Act
-		actual := CountZeroIntersections(current, rotationDiff)
+		actual := CountZeroEndpoints(current, rotationDiff)
 
 		// Assert
 		if actual != expected {

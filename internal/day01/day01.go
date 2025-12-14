@@ -19,7 +19,7 @@ func RotationDiff(input string) int {
 	return i
 }
 
-func CountZeroIntersections(current int, rotationDiff int) int {
+func CountZeroEndpoints(current int, rotationDiff int) int {
 	newPosition := (current + rotationDiff) % 100
 	numIntersections := 0
 	if newPosition == 0 {
@@ -34,7 +34,7 @@ func SolvePart1(filepath string) (int, error) {
 	position := 50
 	for _, n := range entries {
 		rotationDiff := RotationDiff(n)
-		numZeros += CountZeroIntersections(position, rotationDiff)
+		numZeros += CountZeroEndpoints(position, rotationDiff)
 		position = (position + rotationDiff) % 100
 		if position < 0 {
 			position = 100 - position*(-1)
