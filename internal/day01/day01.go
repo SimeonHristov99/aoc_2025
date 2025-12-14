@@ -31,7 +31,8 @@ func CountZeroEndpoints(current int, rotationDiff int) int {
 
 func CountZeroIntersections(current int, rotationDiff int) int {
 	numIntersections := 0
-	if (current + rotationDiff) % 100 == 0 {
+	newPosition := (current + rotationDiff) % 100
+	if newPosition == 0 || (current > 0 && newPosition < 0) {
 		numIntersections = 1
 	}
 	return numIntersections
