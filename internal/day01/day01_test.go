@@ -142,6 +142,21 @@ func TestCountZeroIntersections(t *testing.T) {
 			t.Fatalf("\nactual=\n%#v\nexpected=\n%#v\n", actual, expected)
 		}
 	})
+
+	t.Run("when intersecting zero via addition once then returns one", func(t *testing.T) {
+		// Arrange
+		current := 85
+		rotationDiff := 22
+		expected := 1
+
+		// Act
+		actual := CountZeroIntersections(current, rotationDiff)
+
+		// Assert
+		if actual != expected {
+			t.Fatalf("\nactual=\n%#v\nexpected=\n%#v\n", actual, expected)
+		}
+	})
 }
 
 func TestSolvePart1(t *testing.T) {
