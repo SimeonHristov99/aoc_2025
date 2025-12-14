@@ -82,6 +82,23 @@ func TestCountZeroEndpoints(t *testing.T) {
 	})
 }
 
+func TestCountZeroIntersections(t *testing.T) {
+	t.Run("when not intersecting zero then returns zero", func(t *testing.T) {
+		// Arrange
+		current := 50
+		rotationDiff := 10
+		expected := 0
+
+		// Act
+		actual := CountZeroIntersections(current, rotationDiff)
+
+		// Assert
+		if actual != expected {
+			t.Fatalf("\nactual=\n%#v\nexpected=\n%#v\n", actual, expected)
+		}
+	})
+}
+
 func TestSolvePart1(t *testing.T) {
 	t.Run("when called with sample then returns part one result", func(t *testing.T) {
 		// Arrange
