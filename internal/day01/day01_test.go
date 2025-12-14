@@ -97,6 +97,21 @@ func TestCountZeroIntersections(t *testing.T) {
 			t.Fatalf("\nactual=\n%#v\nexpected=\n%#v\n", actual, expected)
 		}
 	})
+
+	t.Run("when ending at zero then returns one", func(t *testing.T) {
+		// Arrange
+		current := 50
+		rotationDiff := -50
+		expected := 1
+
+		// Act
+		actual := CountZeroIntersections(current, rotationDiff)
+
+		// Assert
+		if actual != expected {
+			t.Fatalf("\nactual=\n%#v\nexpected=\n%#v\n", actual, expected)
+		}
+	})
 }
 
 func TestSolvePart1(t *testing.T) {
