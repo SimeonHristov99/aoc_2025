@@ -30,7 +30,11 @@ func CountZeroEndpoints(current int, rotationDiff int) int {
 
 
 func CountZeroIntersections(current int, rotationDiff int) int {
-	return 0
+	numIntersections := 0
+	if current + rotationDiff == 0 {
+		numIntersections = 1
+	}
+	return numIntersections
 }
 
 func SolvePart1(filepath string) (int, error) {
