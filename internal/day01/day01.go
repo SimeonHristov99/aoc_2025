@@ -28,6 +28,11 @@ func CountZeroEndpoints(current int, rotationDiff int) int {
 	return numIntersections
 }
 
+
+func CountZeroIntersections(current int, rotationDiff int) int {
+	return 0
+}
+
 func SolvePart1(filepath string) (int, error) {
 	numZeros := 0
 	entries := ParseInput(filepath)
