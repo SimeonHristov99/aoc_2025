@@ -4,6 +4,7 @@ import (
 	"os"
 	"strconv"
 	"strings"
+	"fmt"
 )
 
 func ParseInput(filename string) []string {
@@ -32,7 +33,8 @@ func CountZeroEndpoints(current int, rotationDiff int) int {
 func CountZeroIntersections(current int, rotationDiff int) int {
 	numIntersections := 0
 	newPosition := (current + rotationDiff) % 100
-	if newPosition == 0 || current > 0 && newPosition < 0 || rotationDiff > 0 && newPosition < current {
+	fmt.Println(newPosition, rotationDiff, current)
+	if newPosition == 0 || current > 0 && newPosition < 0 || rotationDiff > 0 && newPosition <= current {
 		numIntersections = 1
 	}
 	return numIntersections
