@@ -4,6 +4,7 @@ import (
 	"os"
 	"strconv"
 	"strings"
+	// "fmt"
 )
 
 func parseInput(filename string) [][2]int {
@@ -23,4 +24,17 @@ func isValid(num int) bool {
 	numStr := strconv.Itoa(num)
 	numDigits := len(numStr)
 	return numDigits%2 == 0 && numStr[:numDigits/2] == numStr[numDigits/2:]
+}
+
+func SolvePart1(filepath string) (int, error) {
+	count := 0
+	ids := parseInput(filepath)
+	for _, idRange := range ids {
+		for i := idRange[0]; i <= idRange[1]; i++ {
+			if isValid(i) {
+				count += i
+			}
+		}
+	}
+	return count, nil
 }
