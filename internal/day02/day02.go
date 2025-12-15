@@ -26,7 +26,9 @@ func isValid(num int) bool {
 }
 
 func hasSequenceRepeatedTwice(num int) bool {
-	return false
+	numStr := strconv.Itoa(num)
+	numDigits := len(numStr)
+	return numDigits%2 == 0 && numStr[:numDigits/2] == numStr[numDigits/2:]
 }
 
 func SolvePart1(filepath string) (int, error) {
