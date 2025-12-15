@@ -36,3 +36,19 @@ func TestFindIdxMaxDigit(t *testing.T) {
 		}
 	})
 }
+
+func TestFindMaxJoltage(t *testing.T) {
+	t.Run("when called then returns maximum joltage", func(t *testing.T) {
+		// Arrange
+		input := "811111111111119"
+		expected := 89
+
+		// Act
+		actual := findMaxJoltage(input)
+
+		// Assert
+		if actual != expected {
+			t.Fatalf("\nactual=\n%#v\nexpected=\n%#v\n", actual, expected)
+		}
+	})
+}
