@@ -19,3 +19,11 @@ func findIdxMaxDigit(numStr string) int {
 	}
 	return idxMax
 }
+
+func findMaxJoltage(numStr string) int {
+	idxMaxLeft := findIdxMaxDigit(numStr[:len(numStr)-1])
+	idxMaxRight := findIdxMaxDigit(numStr[idxMaxLeft+1:]) + idxMaxLeft + 1
+	maxLeft := int(numStr[idxMaxLeft] - '0')
+	maxRight := int(numStr[idxMaxRight] - '0')
+	return maxLeft*10 + maxRight
+}
