@@ -49,3 +49,16 @@ func SolvePart1(filepath string) (int, error) {
 	}
 	return count, nil
 }
+
+func SolvePart2(filepath string) (int, error) {
+	count := 0
+	ids := parseInput(filepath)
+	for _, idRange := range ids {
+		for i := idRange[0]; i <= idRange[1]; i++ {
+			if hasSequenceRepeatedTwice(i) {
+				count += i
+			}
+		}
+	}
+	return count, nil
+}
