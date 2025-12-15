@@ -1,10 +1,10 @@
 package day01
 
 import (
+	"fmt"
 	"os"
 	"strconv"
 	"strings"
-	"fmt"
 )
 
 func ParseInput(filename string) []string {
@@ -29,13 +29,22 @@ func CountZeroEndpoints(current int, rotationDiff int) int {
 	return numIntersections
 }
 
-
 func CountZeroIntersections(current int, rotationDiff int) int {
 	numIntersections := 0
-	newPosition := (current + rotationDiff) % 100
-	fmt.Println(newPosition, rotationDiff, current)
-	if newPosition == 0 || current > 0 && newPosition < 0 || rotationDiff > 0 && newPosition <= current {
-		numIntersections = 1
+	adder := 1
+	if rotationDiff > 0 {
+		adder = -1
+	}
+	for rotationDiff != 0 {
+		current = (current + adder) % 100
+		if current < 0 { 
+			current += 100
+		}
+		if current == 0 {
+			numIntersections += 1
+		}
+		rotationDiff += adder
+		fmt.Println(current, rotationDiff, numIntersections)
 	}
 	return numIntersections
 }
