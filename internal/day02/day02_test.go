@@ -107,7 +107,7 @@ func TestHasSequenceRepeatedTwice(t *testing.T) {
 	})
 }
 
-func TestSolvePart1(t *testing.T) {
+func TestSolve(t *testing.T) {
 	t.Run("when called with sample then returns part one result", func(t *testing.T) {
 		// Arrange
 		expected := 1227775554
@@ -115,7 +115,7 @@ func TestSolvePart1(t *testing.T) {
 		file := "sample.txt"
 
 		// Act
-		actual, actualError := SolvePart1(file)
+		actual, actualError := solve(file, isValid)
 
 		// Assert
 		if actualError != expectedError {
@@ -131,6 +131,62 @@ func TestSolvePart1(t *testing.T) {
 		expected := 23560874270
 		var expectedError error = nil
 		file := "input.txt"
+
+		// Act
+		actual, actualError := solve(file, isValid)
+
+		// Assert
+		if actualError != expectedError {
+			t.Fatalf("\nactual=\n%#v\nexpected=\n%#v\n", actualError, expectedError)
+		}
+		if actual != expected {
+			t.Fatalf("\nactual=\n%#v\nexpected=\n%#v\n", actual, expected)
+		}
+	})
+
+	t.Run("when called with sample then returns part two result", func(t *testing.T) {
+		// Arrange
+		expected := 4174379265
+		var expectedError error = nil
+		file := "sample.txt"
+
+		// Act
+		actual, actualError := solve(file, hasSequenceRepeatedTwice)
+
+		// Assert
+		if actualError != expectedError {
+			t.Fatalf("\nactual=\n%#v\nexpected=\n%#v\n", actualError, expectedError)
+		}
+		if actual != expected {
+			t.Fatalf("\nactual=\n%#v\nexpected=\n%#v\n", actual, expected)
+		}
+	})
+
+	t.Run("when called with input then returns part two result", func(t *testing.T) {
+		// Arrange
+		expected := 44143124633
+		var expectedError error = nil
+		file := "input.txt"
+
+		// Act
+		actual, actualError := solve(file, hasSequenceRepeatedTwice)
+
+		// Assert
+		if actualError != expectedError {
+			t.Fatalf("\nactual=\n%#v\nexpected=\n%#v\n", actualError, expectedError)
+		}
+		if actual != expected {
+			t.Fatalf("\nactual=\n%#v\nexpected=\n%#v\n", actual, expected)
+		}
+	})
+}
+
+func TestSolvePart1(t *testing.T) {
+	t.Run("when called with sample then returns part one result", func(t *testing.T) {
+		// Arrange
+		expected := 1227775554
+		var expectedError error = nil
+		file := "sample.txt"
 
 		// Act
 		actual, actualError := SolvePart1(file)
@@ -151,24 +207,6 @@ func TestSolvePart2(t *testing.T) {
 		expected := 4174379265
 		var expectedError error = nil
 		file := "sample.txt"
-
-		// Act
-		actual, actualError := SolvePart2(file)
-
-		// Assert
-		if actualError != expectedError {
-			t.Fatalf("\nactual=\n%#v\nexpected=\n%#v\n", actualError, expectedError)
-		}
-		if actual != expected {
-			t.Fatalf("\nactual=\n%#v\nexpected=\n%#v\n", actual, expected)
-		}
-	})
-
-	t.Run("when called with input then returns part two result", func(t *testing.T) {
-		// Arrange
-		expected := 44143124633
-		var expectedError error = nil
-		file := "input.txt"
 
 		// Act
 		actual, actualError := SolvePart2(file)

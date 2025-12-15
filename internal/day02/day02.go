@@ -37,12 +37,12 @@ func hasSequenceRepeatedTwice(num int) bool {
 	return false
 }
 
-func SolvePart1(filepath string) (int, error) {
+func solve(filepath string, validChecker func(int) bool) (int, error) {
 	count := 0
 	ids := parseInput(filepath)
 	for _, idRange := range ids {
 		for i := idRange[0]; i <= idRange[1]; i++ {
-			if isValid(i) {
+			if validChecker(i) {
 				count += i
 			}
 		}
@@ -50,15 +50,10 @@ func SolvePart1(filepath string) (int, error) {
 	return count, nil
 }
 
+func SolvePart1(filepath string) (int, error) {
+	return solve(filepath, isValid)
+}
+
 func SolvePart2(filepath string) (int, error) {
-	count := 0
-	ids := parseInput(filepath)
-	for _, idRange := range ids {
-		for i := idRange[0]; i <= idRange[1]; i++ {
-			if hasSequenceRepeatedTwice(i) {
-				count += i
-			}
-		}
-	}
-	return count, nil
+	return solve(filepath, hasSequenceRepeatedTwice)
 }
