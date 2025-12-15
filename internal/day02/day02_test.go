@@ -32,3 +32,19 @@ func TestParseInput(t *testing.T) {
 		}
 	})
 }
+
+func TestIsValid(t *testing.T) {
+	t.Run("when no sequence repeated twice then returns false", func(t *testing.T) {
+		// Arrange
+		input := 101
+		expected := false
+
+		// Act
+		actual := isValid(input)
+
+		// Assert
+		if actual != expected {
+			t.Fatalf("\nactual=\n%#v\nexpected=\n%#v\n", actual, expected)
+		}
+	})
+}
