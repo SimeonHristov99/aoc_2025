@@ -4,7 +4,6 @@ import (
 	"os"
 	"strconv"
 	"strings"
-	// "fmt"
 )
 
 func parseInput(filename string) [][2]int {
