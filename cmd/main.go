@@ -7,6 +7,7 @@ import (
 	"os"
 
 	"github.com/SimeonHristov99/aoc_2025/internal/day01"
+	"github.com/SimeonHristov99/aoc_2025/internal/day02"
 )
 
 type Config struct {
@@ -34,6 +35,9 @@ func main() {
 		1: {
 			1: day01.SolvePart1,
 			2: day01.SolvePart2,
+		},
+		2: {
+			1: day02.SolvePart1,
 		},
 	}
 	config, _ := parseArgs(os.Args[1:])
