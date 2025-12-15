@@ -1,7 +1,6 @@
 package day01
 
 import (
-	"fmt"
 	"os"
 	"strconv"
 	"strings"
@@ -36,15 +35,14 @@ func CountZeroIntersections(current int, rotationDiff int) int {
 		adder = -1
 	}
 	for rotationDiff != 0 {
-		current = (current + adder) % 100
-		if current < 0 { 
+		current = (current - adder) % 100
+		if current < 0 {
 			current += 100
 		}
 		if current == 0 {
 			numIntersections += 1
 		}
 		rotationDiff += adder
-		fmt.Println(current, rotationDiff, numIntersections)
 	}
 	return numIntersections
 }
