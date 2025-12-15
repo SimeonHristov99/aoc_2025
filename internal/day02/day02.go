@@ -18,3 +18,7 @@ func parseInput(filename string) [][2]int {
 	}
 	return idRange
 }
+
+func isValid(num int) bool {
+	return false
+}
