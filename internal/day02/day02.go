@@ -4,7 +4,6 @@ import (
 	"os"
 	"strconv"
 	"strings"
-	"fmt"
 )
 
 func parseInput(filename string) [][2]int {
@@ -29,10 +28,9 @@ func isValid(num int) bool {
 func hasSequenceRepeatedTwice(num int) bool {
 	numStr := strconv.Itoa(num)
 	numDigits := len(numStr)
-	for i := 1; i < numDigits / 2; i++ {
+	for i := 1; i <= numDigits/2; i++ {
 		counts := strings.Count(numStr, numStr[:i])
-		fmt.Println(numStr[:i], counts, counts * i)
-		if counts > 2 && counts * i == numDigits {
+		if counts >= 2 && counts*i == numDigits {
 			return true
 		}
 	}
