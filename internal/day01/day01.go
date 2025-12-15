@@ -61,3 +61,18 @@ func SolvePart1(filepath string) (int, error) {
 	}
 	return numZeros, nil
 }
+
+func SolvePart2(filepath string) (int, error) {
+	numZeros := 0
+	entries := ParseInput(filepath)
+	position := 50
+	for _, n := range entries {
+		rotationDiff := RotationDiff(n)
+		numZeros += CountZeroIntersections(position, rotationDiff)
+		position = (position + rotationDiff) % 100
+		if position < 0 {
+			position = 100 - position*(-1)
+		}
+	}
+	return numZeros, nil
+}
