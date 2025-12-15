@@ -10,13 +10,12 @@ func parseInput(filepath string) []string {
 	return strings.Fields(string(contents))
 }
 
-func findMaxDigit(numStr string) int {
-	maxDigit := numStr[0] - '0'
-	numDigits := len(numStr)
-	for i := 1; i < numDigits; i++ {
-		if maxDigit < numStr[i] {
-			maxDigit = numStr[i]
+func findIdxMaxDigit(numStr string) int {
+	idxMax := 0
+	for idxCurrent, current := range numStr {
+		if int(current-'0') > int(numStr[idxMax]-'0') {
+			idxMax = idxCurrent
 		}
 	}
-	return int(maxDigit - '0')
+	return idxMax
 }
