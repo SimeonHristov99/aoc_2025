@@ -47,4 +47,18 @@ func TestIsValid(t *testing.T) {
 			t.Fatalf("\nactual=\n%#v\nexpected=\n%#v\n", actual, expected)
 		}
 	})
+
+	t.Run("when sequence repeated twice then returns true", func(t *testing.T) {
+		// Arrange
+		input := 1010
+		expected := true
+
+		// Act
+		actual := isValid(input)
+
+		// Assert
+		if actual != expected {
+			t.Fatalf("\nactual=\n%#v\nexpected=\n%#v\n", actual, expected)
+		}
+	})
 }
