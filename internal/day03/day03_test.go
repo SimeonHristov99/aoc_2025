@@ -21,14 +21,14 @@ func TestParseInput(t *testing.T) {
 	})
 }
 
-func TestFindMaxDigit(t *testing.T) {
+func TestFindIdxMaxDigit(t *testing.T) {
 	t.Run("when called then returns max digit", func(t *testing.T) {
 		// Arrange
 		input := "818181911112111"
-		expected := 9
+		expected := 6
 
 		// Act
-		actual := findMaxDigit(input)
+		actual := findIdxMaxDigit(input)
 
 		// Assert
 		if actual != expected {
