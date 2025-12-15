@@ -20,5 +20,7 @@ func parseInput(filename string) [][2]int {
 }
 
 func isValid(num int) bool {
-	return false
+	numStr := strconv.Itoa(num)
+	numDigits := len(numStr)
+	return numDigits%2 == 0 && numStr[:numDigits/2] == numStr[numDigits/2:]
 }
