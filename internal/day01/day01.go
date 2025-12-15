@@ -47,13 +47,13 @@ func countZeroIntersections(current int, rotationDiff int) int {
 	return numIntersections
 }
 
-func SolvePart1(filepath string) (int, error) {
+func solve(filepath string, zeroCounter func(int, int) int) (int, error) {
 	numZeros := 0
 	entries := parseInput(filepath)
 	position := 50
 	for _, n := range entries {
 		rotationDiff := rotationDiff(n)
-		numZeros += countZeroEndpoints(position, rotationDiff)
+		numZeros += zeroCounter(position, rotationDiff)
 		position = (position + rotationDiff) % 100
 		if position < 0 {
 			position += 100
@@ -62,17 +62,10 @@ func SolvePart1(filepath string) (int, error) {
 	return numZeros, nil
 }
 
+func SolvePart1(filepath string) (int, error) {
+	return solve(filepath, countZeroEndpoints)
+}
+
 func SolvePart2(filepath string) (int, error) {
-	numZeros := 0
-	entries := parseInput(filepath)
-	position := 50
-	for _, n := range entries {
-		rotationDiff := rotationDiff(n)
-		numZeros += countZeroIntersections(position, rotationDiff)
-		position = (position + rotationDiff) % 100
-		if position < 0 {
-			position += 100
-		}
-	}
-	return numZeros, nil
+	return solve(filepath, countZeroIntersections)
 }
