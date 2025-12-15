@@ -63,6 +63,22 @@ func TestIsValid(t *testing.T) {
 	})
 }
 
+func TestHasSequenceRepeatedTwice(t *testing.T) {
+	t.Run("when no repetitions then returns false", func(t *testing.T) {
+		// Arrange
+		input := 10101
+		expected := false
+
+		// Act
+		actual := hasSequenceRepeatedTwice(input)
+
+		// Assert
+		if actual != expected {
+			t.Fatalf("\nactual=\n%#v\nexpected=\n%#v\n", actual, expected)
+		}
+	})
+}
+
 func TestSolvePart1(t *testing.T) {
 	t.Run("when called with sample then returns part one result", func(t *testing.T) {
 		// Arrange
