@@ -6,12 +6,12 @@ import (
 	"strings"
 )
 
-func ParseInput(filename string) []string {
+func parseInput(filename string) []string {
 	contents, _ := os.ReadFile(filename)
 	return strings.Split(strings.TrimSpace(string(contents)), "\n")
 }
 
-func RotationDiff(input string) int {
+func rotationDiff(input string) int {
 	i, _ := strconv.Atoi(input[1:])
 	if input[0] == 'L' {
 		return -1 * i
@@ -19,7 +19,7 @@ func RotationDiff(input string) int {
 	return i
 }
 
-func CountZeroEndpoints(current int, rotationDiff int) int {
+func countZeroEndpoints(current int, rotationDiff int) int {
 	newPosition := (current + rotationDiff) % 100
 	numIntersections := 0
 	if newPosition == 0 {
@@ -28,7 +28,7 @@ func CountZeroEndpoints(current int, rotationDiff int) int {
 	return numIntersections
 }
 
-func CountZeroIntersections(current int, rotationDiff int) int {
+func countZeroIntersections(current int, rotationDiff int) int {
 	numIntersections := 0
 	adder := 1
 	if rotationDiff > 0 {
@@ -49,14 +49,14 @@ func CountZeroIntersections(current int, rotationDiff int) int {
 
 func SolvePart1(filepath string) (int, error) {
 	numZeros := 0
-	entries := ParseInput(filepath)
+	entries := parseInput(filepath)
 	position := 50
 	for _, n := range entries {
-		rotationDiff := RotationDiff(n)
-		numZeros += CountZeroEndpoints(position, rotationDiff)
+		rotationDiff := rotationDiff(n)
+		numZeros += countZeroEndpoints(position, rotationDiff)
 		position = (position + rotationDiff) % 100
 		if position < 0 {
-			position = 100 - position*(-1)
+			position += 100
 		}
 	}
 	return numZeros, nil
@@ -64,14 +64,14 @@ func SolvePart1(filepath string) (int, error) {
 
 func SolvePart2(filepath string) (int, error) {
 	numZeros := 0
-	entries := ParseInput(filepath)
+	entries := parseInput(filepath)
 	position := 50
 	for _, n := range entries {
-		rotationDiff := RotationDiff(n)
-		numZeros += CountZeroIntersections(position, rotationDiff)
+		rotationDiff := rotationDiff(n)
+		numZeros += countZeroIntersections(position, rotationDiff)
 		position = (position + rotationDiff) % 100
 		if position < 0 {
-			position = 100 - position*(-1)
+			position += 100
 		}
 	}
 	return numZeros, nil

@@ -17,7 +17,7 @@ type Config struct {
 
 type Solver func(string) (int, error)
 
-func ParseArgs(args []string) (Config, error) {
+func parseArgs(args []string) (Config, error) {
 	var config Config
 	fs := flag.NewFlagSet("aoc_2025", flag.ContinueOnError)
 	fs.IntVar(&config.Day, "day", 1, "which day to run")
@@ -33,9 +33,10 @@ func main() {
 	solvers := map[int]map[int]Solver{
 		1: {
 			1: day01.SolvePart1,
+			2: day01.SolvePart2,
 		},
 	}
-	config, _ := ParseArgs(os.Args[1:])
+	config, _ := parseArgs(os.Args[1:])
 	if _, err := os.Stat(config.Input); errors.Is(err, os.ErrNotExist) {
 		fmt.Fprintf(os.Stderr, "file '%s' does not exist\n", config.Input)
 		return

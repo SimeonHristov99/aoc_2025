@@ -38,7 +38,7 @@ func TestParseArgs(t *testing.T) {
 		var expectedErr error = nil
 
 		// Act
-		actual, actualErr := ParseArgs([]string{})
+		actual, actualErr := parseArgs([]string{})
 
 		// Assert
 		if actualErr != expectedErr {
@@ -63,7 +63,7 @@ func TestParseArgs(t *testing.T) {
 		var expectedErr error = nil
 
 		// Act
-		actual, actualErr := ParseArgs([]string{
+		actual, actualErr := parseArgs([]string{
 			fmt.Sprintf("-day=%d", day),
 			fmt.Sprintf("-part=%d", part),
 			fmt.Sprintf("-input=%s", input),
@@ -90,7 +90,7 @@ func TestParseArgs(t *testing.T) {
 		var expectedErr error = nil
 
 		// Act
-		actual, actualErr := ParseArgs([]string{
+		actual, actualErr := parseArgs([]string{
 			fmt.Sprintf("-input=%s", input),
 		})
 
@@ -113,7 +113,7 @@ func TestParseArgs(t *testing.T) {
 		expectedErrorMessage := "invalid value \"something\" for flag -part: parse error"
 
 		// Act
-		actualConfig, err := ParseArgs([]string{
+		actualConfig, err := parseArgs([]string{
 			fmt.Sprintf("-day=%d", day),
 			fmt.Sprintf("-part=%s", part),
 			fmt.Sprintf("-input=%s", input),

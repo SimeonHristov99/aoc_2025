@@ -12,7 +12,7 @@ func TestParseInput(t *testing.T) {
 		expected := []string{"L68", "L30", "R48", "L5", "R60", "L55", "L1", "L99", "R14", "L82"}
 
 		// Act
-		actual := ParseInput(filename)
+		actual := parseInput(filename)
 
 		// Assert
 		if !reflect.DeepEqual(actual, expected) {
@@ -28,7 +28,7 @@ func TestRotationDiff(t *testing.T) {
 		expected := -5
 
 		// Act
-		actual := RotationDiff(input)
+		actual := rotationDiff(input)
 
 		// Assert
 		if actual != expected {
@@ -42,7 +42,7 @@ func TestRotationDiff(t *testing.T) {
 		expected := -99
 
 		// Act
-		actual := RotationDiff(input)
+		actual := rotationDiff(input)
 
 		// Assert
 		if actual != expected {
@@ -56,7 +56,7 @@ func TestRotationDiff(t *testing.T) {
 		expected := 60
 
 		// Act
-		actual := RotationDiff(input)
+		actual := rotationDiff(input)
 
 		// Assert
 		if actual != expected {
@@ -73,7 +73,7 @@ func TestCountZeroEndpoints(t *testing.T) {
 		expected := 0
 
 		// Act
-		actual := CountZeroEndpoints(current, rotationDiff)
+		actual := countZeroEndpoints(current, rotationDiff)
 
 		// Assert
 		if actual != expected {
@@ -90,7 +90,7 @@ func TestCountZeroIntersections(t *testing.T) {
 		expected := 0
 
 		// Act
-		actual := CountZeroIntersections(current, rotationDiff)
+		actual := countZeroIntersections(current, rotationDiff)
 
 		// Assert
 		if actual != expected {
@@ -105,7 +105,7 @@ func TestCountZeroIntersections(t *testing.T) {
 		expected := 1
 
 		// Act
-		actual := CountZeroIntersections(current, rotationDiff)
+		actual := countZeroIntersections(current, rotationDiff)
 
 		// Assert
 		if actual != expected {
@@ -120,7 +120,7 @@ func TestCountZeroIntersections(t *testing.T) {
 		expected := 1
 
 		// Act
-		actual := CountZeroIntersections(current, rotationDiff)
+		actual := countZeroIntersections(current, rotationDiff)
 
 		// Assert
 		if actual != expected {
@@ -135,7 +135,7 @@ func TestCountZeroIntersections(t *testing.T) {
 		expected := 1
 
 		// Act
-		actual := CountZeroIntersections(current, rotationDiff)
+		actual := countZeroIntersections(current, rotationDiff)
 
 		// Assert
 		if actual != expected {
@@ -150,7 +150,7 @@ func TestCountZeroIntersections(t *testing.T) {
 		expected := 1
 
 		// Act
-		actual := CountZeroIntersections(current, rotationDiff)
+		actual := countZeroIntersections(current, rotationDiff)
 
 		// Assert
 		if actual != expected {
@@ -165,7 +165,7 @@ func TestCountZeroIntersections(t *testing.T) {
 		expected := 1
 
 		// Act
-		actual := CountZeroIntersections(current, rotationDiff)
+		actual := countZeroIntersections(current, rotationDiff)
 
 		// Assert
 		if actual != expected {
@@ -180,7 +180,7 @@ func TestCountZeroIntersections(t *testing.T) {
 		expected := 1
 
 		// Act
-		actual := CountZeroIntersections(current, rotationDiff)
+		actual := countZeroIntersections(current, rotationDiff)
 
 		// Assert
 		if actual != expected {
@@ -228,11 +228,29 @@ func TestSolvePart1(t *testing.T) {
 }
 
 func TestSolvePart2(t *testing.T) {
-	t.Run("when called with sample then returns part one result", func(t *testing.T) {
+	t.Run("when called with sample then returns part two result", func(t *testing.T) {
 		// Arrange
 		expected := 6
 		var expectedError error = nil
 		file := "sample.txt"
+
+		// Act
+		actual, actualError := SolvePart2(file)
+
+		// Assert
+		if actualError != expectedError {
+			t.Fatalf("\nactual=\n%#v\nexpected=\n%#v\n", actualError, expectedError)
+		}
+		if actual != expected {
+			t.Fatalf("\nactual=\n%#v\nexpected=\n%#v\n", actual, expected)
+		}
+	})
+
+	t.Run("when called with input then returns part two result", func(t *testing.T) {
+		// Arrange
+		expected := 5961
+		var expectedError error = nil
+		file := "input.txt"
 
 		// Act
 		actual, actualError := SolvePart2(file)
