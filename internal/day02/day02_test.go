@@ -77,6 +77,20 @@ func TestHasSequenceRepeatedTwice(t *testing.T) {
 			t.Fatalf("\nactual=\n%#v\nexpected=\n%#v\n", actual, expected)
 		}
 	})
+
+	t.Run("when repeated two times then returns false", func(t *testing.T) {
+		// Arrange
+		input := 1010
+		expected := true
+
+		// Act
+		actual := hasSequenceRepeatedTwice(input)
+
+		// Assert
+		if actual != expected {
+			t.Fatalf("\nactual=\n%#v\nexpected=\n%#v\n", actual, expected)
+		}
+	})
 }
 
 func TestSolvePart1(t *testing.T) {
