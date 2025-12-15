@@ -78,9 +78,23 @@ func TestHasSequenceRepeatedTwice(t *testing.T) {
 		}
 	})
 
-	t.Run("when repeated two times then returns false", func(t *testing.T) {
+	t.Run("when repeated two times then returns true", func(t *testing.T) {
 		// Arrange
 		input := 1010
+		expected := true
+
+		// Act
+		actual := hasSequenceRepeatedTwice(input)
+
+		// Assert
+		if actual != expected {
+			t.Fatalf("\nactual=\n%#v\nexpected=\n%#v\n", actual, expected)
+		}
+	})
+
+	t.Run("when repeated three times then returns true", func(t *testing.T) {
+		// Arrange
+		input := 123123123
 		expected := true
 
 		// Act
