@@ -25,6 +25,10 @@ func isValid(num int) bool {
 	return numDigits%2 == 0 && numStr[:numDigits/2] == numStr[numDigits/2:]
 }
 
+func hasSequenceRepeatedTwice(num int) bool {
+	return false
+}
+
 func SolvePart1(filepath string) (int, error) {
 	count := 0
 	ids := parseInput(filepath)
