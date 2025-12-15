@@ -27,3 +27,12 @@ func findMaxJoltage(numStr string) int {
 	maxRight := int(numStr[idxMaxRight] - '0')
 	return maxLeft*10 + maxRight
 }
+
+func SolvePart1(filepath string) (int, error) {
+	batteryBanks := parseInput(filepath)
+	outputJoltage := 0
+	for _, batteryBank := range batteryBanks {
+		outputJoltage += findMaxJoltage(batteryBank)
+	}
+	return outputJoltage, nil
+}
