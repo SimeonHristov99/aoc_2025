@@ -1,10 +1,10 @@
 package day03
 
 import (
-	"os"
-	"strings"
-	"strconv"
 	"math"
+	"os"
+	"strconv"
+	"strings"
 )
 
 func parseInput(filepath string) []string {
@@ -29,9 +29,10 @@ func findMaxJoltage(numStr string) int {
 	windowSize := numBatteries - neededBatteries + 1
 	lastMaxIdx := -1
 	for i := 0; i < neededBatteries; i++ {
-		upperBoundary := int(math.Min(float64(i + windowSize), float64(numBatteries)))
-		idxMax := findIdxMaxDigit(numStr[lastMaxIdx + 1 : upperBoundary]) + i
-		sb.WriteString(string(numStr[idxMax]))
+		upperBoundary := int(math.Min(float64(i+windowSize), float64(numBatteries)))
+		window := numStr[lastMaxIdx+1 : upperBoundary]
+		idxMax := findIdxMaxDigit(window)
+		sb.WriteString(string(window[idxMax]))
 		lastMaxIdx = idxMax
 	}
 	result, _ := strconv.Atoi(sb.String())
