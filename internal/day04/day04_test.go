@@ -303,4 +303,22 @@ func TestSolvePart2(t *testing.T) {
 			t.Fatalf("\nactual=\n%#v\nexpected=\n%#v\n", actual, expected)
 		}
 	})
+
+	t.Run("when called with input then returns part two result", func(t *testing.T) {
+		// Arrange
+		expected := 8768
+		var expectedError error = nil
+		file := "input.txt"
+
+		// Act
+		actual, actualError := SolvePart2(file)
+
+		// Assert
+		if actualError != expectedError {
+			t.Fatalf("\nactual=\n%#v\nexpected=\n%#v\n", actualError, expectedError)
+		}
+		if actual != expected {
+			t.Fatalf("\nactual=\n%#v\nexpected=\n%#v\n", actual, expected)
+		}
+	})
 }
