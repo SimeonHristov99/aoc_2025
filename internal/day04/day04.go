@@ -48,6 +48,17 @@ func getAccessibleIndices(rolls []string) [][2]int {
 	return accessibleIndices
 }
 
+func removeRolls(rolls []string, indices [][2]int) []string {
+	for _, idxs := range indices {
+		row := idxs[0]
+		col := idxs[1]
+		b := []byte(rolls[idxs[0]])
+		b[col] = '.'
+		rolls[row] = string(b)
+	}
+	return rolls
+}
+
 func SolvePart1(filepath string) (int, error) {
 	return len(getAccessibleIndices(parseInput(filepath))), nil
 }
