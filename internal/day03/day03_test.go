@@ -51,6 +51,20 @@ func TestFindMaxJoltage(t *testing.T) {
 			t.Fatalf("\nactual=\n%#v\nexpected=\n%#v\n", actual, expected)
 		}
 	})
+
+	t.Run("when max digits not at edges then returns maximum joltage", func(t *testing.T) {
+		// Arrange
+		input := "111111181111911"
+		expected := 89
+
+		// Act
+		actual := findMaxJoltage(input)
+
+		// Assert
+		if actual != expected {
+			t.Fatalf("\nactual=\n%#v\nexpected=\n%#v\n", actual, expected)
+		}
+	})
 }
 
 func TestSolvePart1(t *testing.T) {
