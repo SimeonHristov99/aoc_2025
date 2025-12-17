@@ -4,6 +4,7 @@ import (
 	"os"
 	"strconv"
 	"strings"
+	// "fmt"
 )
 
 func parseInput(filepath string) []string {
@@ -21,17 +22,19 @@ func findIdxMaxDigit(numStr string) int {
 	return idxMax
 }
 
-func findMaxJoltage(numStr string) int {
+func findMaxJoltage(numStr string, neededBatteries int) int {
 	var sb strings.Builder
-	neededBatteries := 2
 	numBatteries := len(numStr)
 	windowSize := numBatteries - neededBatteries + 1
 	lastMaxIdx := -1
 	for i := 0; i < neededBatteries; i++ {
-		window := numStr[lastMaxIdx+1 : i+windowSize]
-		idxMax := findIdxMaxDigit(window)
-		sb.WriteString(string(window[idxMax]))
-		lastMaxIdx = idxMax
+		window := numStr[i : i+windowSize]
+		windowForMax := window[lastMaxIdx+1:]
+		idxMax := findIdxMaxDigit(windowForMax)
+		sb.WriteString(string(windowForMax[idxMax]))
+		// fmt.Println("window=", window, "windowForMax", windowForMax, "lastMaxIdx", lastMaxIdx, "max=", string(windowForMax[idxMax]))
+		lastMaxIdx = len(window) - len(windowForMax) + idxMax - 1
+		// fmt.Println("    lastMaxIdx =>", lastMaxIdx)
 	}
 	result, _ := strconv.Atoi(sb.String())
 	return result
@@ -41,7 +44,7 @@ func SolvePart1(filepath string) (int, error) {
 	batteryBanks := parseInput(filepath)
 	outputJoltage := 0
 	for _, batteryBank := range batteryBanks {
-		outputJoltage += findMaxJoltage(batteryBank)
+		outputJoltage += findMaxJoltage(batteryBank, 2)
 	}
 	return outputJoltage, nil
 }
