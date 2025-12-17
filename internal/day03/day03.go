@@ -37,20 +37,19 @@ func findMaxJoltage(numStr string, neededBatteries int) int {
 	return result
 }
 
-func SolvePart1(filepath string) (int, error) {
+func solve(filepath string, neededBatteries int) (int, error) {
 	batteryBanks := parseInput(filepath)
 	outputJoltage := 0
 	for _, batteryBank := range batteryBanks {
-		outputJoltage += findMaxJoltage(batteryBank, 2)
+		outputJoltage += findMaxJoltage(batteryBank, neededBatteries)
 	}
 	return outputJoltage, nil
 }
 
+func SolvePart1(filepath string) (int, error) {
+	return solve(filepath, 2)
+}
+
 func SolvePart2(filepath string) (int, error) {
-	batteryBanks := parseInput(filepath)
-	outputJoltage := 0
-	for _, batteryBank := range batteryBanks {
-		outputJoltage += findMaxJoltage(batteryBank, 12)
-	}
-	return outputJoltage, nil
+	return solve(filepath, 12)
 }
