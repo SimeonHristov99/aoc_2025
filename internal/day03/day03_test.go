@@ -58,7 +58,14 @@ func TestFindMaxJoltage(t *testing.T) {
 		expected := 89
 
 		// Act
-		actual := findMaxJoltage(input)
+	t.Run("when temp then returns maximum joltage", func(t *testing.T) {
+		// Arrange
+		input := "234234234234278"
+		neededBatteries := 12
+		expected := 434234234278
+
+		// Act
+		actual := findMaxJoltage(input, neededBatteries)
 
 		// Assert
 		if actual != expected {
