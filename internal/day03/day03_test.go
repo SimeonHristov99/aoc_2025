@@ -41,10 +41,11 @@ func TestFindMaxJoltage(t *testing.T) {
 	t.Run("when max digits at edges then returns maximum joltage", func(t *testing.T) {
 		// Arrange
 		input := "811111111111119"
+		neededBatteries := 2
 		expected := 89
 
 		// Act
-		actual := findMaxJoltage(input)
+		actual := findMaxJoltage(input, neededBatteries)
 
 		// Assert
 		if actual != expected {
@@ -55,9 +56,18 @@ func TestFindMaxJoltage(t *testing.T) {
 	t.Run("when left max digit not at edge then returns maximum joltage", func(t *testing.T) {
 		// Arrange
 		input := "1111111811119"
+		neededBatteries := 2
 		expected := 89
 
 		// Act
+		actual := findMaxJoltage(input, neededBatteries)
+
+		// Assert
+		if actual != expected {
+			t.Fatalf("\nactual=\n%#v\nexpected=\n%#v\n", actual, expected)
+		}
+	})
+
 	t.Run("when temp then returns maximum joltage", func(t *testing.T) {
 		// Arrange
 		input := "234234234234278"
