@@ -1,7 +1,6 @@
 package day03
 
 import (
-	"math"
 	"os"
 	"strconv"
 	"strings"
@@ -29,8 +28,7 @@ func findMaxJoltage(numStr string) int {
 	windowSize := numBatteries - neededBatteries + 1
 	lastMaxIdx := -1
 	for i := 0; i < neededBatteries; i++ {
-		upperBoundary := int(math.Min(float64(i+windowSize), float64(numBatteries)))
-		window := numStr[lastMaxIdx+1 : upperBoundary]
+		window := numStr[lastMaxIdx+1 : i+windowSize]
 		idxMax := findIdxMaxDigit(window)
 		sb.WriteString(string(window[idxMax]))
 		lastMaxIdx = idxMax
