@@ -62,3 +62,20 @@ func removeRolls(rolls []string, indices [][2]int) []string {
 func SolvePart1(filepath string) (int, error) {
 	return len(getAccessibleIndices(parseInput(filepath))), nil
 }
+
+func SolvePart2(filepath string) (int, error) {
+	paperRolls := parseInput(filepath)
+	totalRemoved := 0
+	var removableRolls [][2]int
+	numRemovable := 0
+	for {
+		removableRolls = getAccessibleIndices(paperRolls)
+		numRemovable = len(removableRolls)
+		if numRemovable == 0 {
+			break
+		}
+		totalRemoved += numRemovable
+		paperRolls = removeRolls(paperRolls, removableRolls)
+	}
+	return totalRemoved, nil
+}
