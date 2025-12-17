@@ -284,3 +284,23 @@ func TestSolvePart1(t *testing.T) {
 		}
 	})
 }
+
+func TestSolvePart2(t *testing.T) {
+	t.Run("when called with sample then returns part two result", func(t *testing.T) {
+		// Arrange
+		expected := 43
+		var expectedError error = nil
+		file := "sample.txt"
+
+		// Act
+		actual, actualError := SolvePart2(file)
+
+		// Assert
+		if actualError != expectedError {
+			t.Fatalf("\nactual=\n%#v\nexpected=\n%#v\n", actualError, expectedError)
+		}
+		if actual != expected {
+			t.Fatalf("\nactual=\n%#v\nexpected=\n%#v\n", actual, expected)
+		}
+	})
+}
