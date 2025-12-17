@@ -194,6 +194,59 @@ func TestGetAccessibleIndices(t *testing.T) {
 	})
 }
 
+func TestRemoveRolls(t *testing.T) {
+	t.Run("when called then removes all specified paper rolls", func(t *testing.T) {
+		// Arrange
+		rolls := []string{
+			"..@@.@@@@.",
+			"@@@.@.@.@@",
+			"@@@@@.@.@@",
+			"@.@@@@..@.",
+			"@@.@@@@.@@",
+			".@@@@@@@.@",
+			".@.@.@.@@@",
+			"@.@@@.@@@@",
+			".@@@@@@@@.",
+			"@.@.@@@.@.",
+		}
+		indices := [][2]int{
+			[2]int{0, 2},
+			[2]int{0, 3},
+			[2]int{0, 5},
+			[2]int{0, 6},
+			[2]int{0, 8},
+			[2]int{1, 0},
+			[2]int{2, 6},
+			[2]int{4, 0},
+			[2]int{4, 9},
+			[2]int{7, 0},
+			[2]int{9, 0},
+			[2]int{9, 2},
+			[2]int{9, 8},
+		}
+		expected := []string{
+			".......@..",
+			".@@.@.@.@@",
+			"@@@@@...@@",
+			"@.@@@@..@.",
+			".@.@@@@.@.",
+			".@@@@@@@.@",
+			".@.@.@.@@@",
+			"..@@@.@@@@",
+			".@@@@@@@@.",
+			"....@@@...",
+		}
+
+		// Act
+		actual := removeRolls(rolls, indices)
+
+		// Assert
+		if !reflect.DeepEqual(actual, expected) {
+			t.Fatalf("\nactual=\n%#v\nexpected=\n%#v\n", actual, expected)
+		}
+	})
+}
+
 func TestSolvePart1(t *testing.T) {
 	t.Run("when called with sample then returns part one result", func(t *testing.T) {
 		// Arrange
