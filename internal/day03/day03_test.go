@@ -141,4 +141,3 @@ func TestSolvePart2(t *testing.T) {
 		}
 	})
 }
-
