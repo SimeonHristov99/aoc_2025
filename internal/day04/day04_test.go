@@ -153,6 +153,47 @@ func TestCoordsAreValid(t *testing.T) {
 	})
 }
 
+func TestGetAccessibleIndices(t *testing.T) {
+	t.Run("when called then returns indices of accessible rolls", func(t *testing.T) {
+		// Arrange
+		rolls := []string{
+			"..@@.@@@@.",
+			"@@@.@.@.@@",
+			"@@@@@.@.@@",
+			"@.@@@@..@.",
+			"@@.@@@@.@@",
+			".@@@@@@@.@",
+			".@.@.@.@@@",
+			"@.@@@.@@@@",
+			".@@@@@@@@.",
+			"@.@.@@@.@.",
+		}
+		expected := [][2]int{
+			[2]int{0, 2},
+			[2]int{0, 3},
+			[2]int{0, 5},
+			[2]int{0, 6},
+			[2]int{0, 8},
+			[2]int{1, 0},
+			[2]int{2, 6},
+			[2]int{4, 0},
+			[2]int{4, 9},
+			[2]int{7, 0},
+			[2]int{9, 0},
+			[2]int{9, 2},
+			[2]int{9, 8},
+		}
+
+		// Act
+		actual := getAccessibleIndices(rolls)
+
+		// Assert
+		if !reflect.DeepEqual(actual, expected) {
+			t.Fatalf("\nactual=\n%#v\nexpected=\n%#v\n", actual, expected)
+		}
+	})
+}
+
 func TestSolvePart1(t *testing.T) {
 	t.Run("when called with sample then returns part one result", func(t *testing.T) {
 		// Arrange
