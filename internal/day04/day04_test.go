@@ -42,7 +42,7 @@ func TestCoordsAreValid(t *testing.T) {
 		expected := false
 
 		// Act
-		actual := CoordsAreValid(row, col, numRows, numCols)
+		actual := coordsAreValid(row, col, numRows, numCols)
 
 		// Assert
 		if actual != expected {
@@ -59,7 +59,7 @@ func TestCoordsAreValid(t *testing.T) {
 		expected := false
 
 		// Act
-		actual := CoordsAreValid(row, col, numRows, numCols)
+		actual := coordsAreValid(row, col, numRows, numCols)
 
 		// Assert
 		if actual != expected {
@@ -76,7 +76,7 @@ func TestCoordsAreValid(t *testing.T) {
 		expected := false
 
 		// Act
-		actual := CoordsAreValid(row, col, numRows, numCols)
+		actual := coordsAreValid(row, col, numRows, numCols)
 
 		// Assert
 		if actual != expected {
@@ -93,7 +93,7 @@ func TestCoordsAreValid(t *testing.T) {
 		expected := false
 
 		// Act
-		actual := CoordsAreValid(row, col, numRows, numCols)
+		actual := coordsAreValid(row, col, numRows, numCols)
 
 		// Assert
 		if actual != expected {
@@ -110,7 +110,7 @@ func TestCoordsAreValid(t *testing.T) {
 		expected := false
 
 		// Act
-		actual := CoordsAreValid(row, col, numRows, numCols)
+		actual := coordsAreValid(row, col, numRows, numCols)
 
 		// Assert
 		if actual != expected {
@@ -127,7 +127,7 @@ func TestCoordsAreValid(t *testing.T) {
 		expected := false
 
 		// Act
-		actual := CoordsAreValid(row, col, numRows, numCols)
+		actual := coordsAreValid(row, col, numRows, numCols)
 
 		// Assert
 		if actual != expected {
@@ -144,9 +144,29 @@ func TestCoordsAreValid(t *testing.T) {
 		expected := true
 
 		// Act
-		actual := CoordsAreValid(row, col, numRows, numCols)
+		actual := coordsAreValid(row, col, numRows, numCols)
 
 		// Assert
+		if actual != expected {
+			t.Fatalf("\nactual=\n%#v\nexpected=\n%#v\n", actual, expected)
+		}
+	})
+}
+
+func TestSolvePart1(t *testing.T) {
+	t.Run("when called with sample then returns part one result", func(t *testing.T) {
+		// Arrange
+		expected := 13
+		var expectedError error = nil
+		file := "sample.txt"
+
+		// Act
+		actual, actualError := SolvePart1(file)
+
+		// Assert
+		if actualError != expectedError {
+			t.Fatalf("\nactual=\n%#v\nexpected=\n%#v\n", actualError, expectedError)
+		}
 		if actual != expected {
 			t.Fatalf("\nactual=\n%#v\nexpected=\n%#v\n", actual, expected)
 		}
