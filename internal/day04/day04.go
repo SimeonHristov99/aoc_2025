@@ -12,5 +12,5 @@ func parseInput(filepath string) []string {
 }
 
 func CoordsAreValid(row int, col int, numRows int, numCols int) bool {
-	return false
+	return 0 <= row && row < numRows && 0 <= col && col < numCols
 }
