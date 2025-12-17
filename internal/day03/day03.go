@@ -3,6 +3,8 @@ package day03
 import (
 	"os"
 	"strings"
+	"strconv"
+	"math"
 )
 
 func parseInput(filepath string) []string {
@@ -21,11 +23,19 @@ func findIdxMaxDigit(numStr string) int {
 }
 
 func findMaxJoltage(numStr string) int {
-	idxMaxLeft := findIdxMaxDigit(numStr[:len(numStr)-1])
-	idxMaxRight := findIdxMaxDigit(numStr[idxMaxLeft+1:]) + idxMaxLeft + 1
-	maxLeft := int(numStr[idxMaxLeft] - '0')
-	maxRight := int(numStr[idxMaxRight] - '0')
-	return maxLeft*10 + maxRight
+	var sb strings.Builder
+	neededBatteries := 2
+	numBatteries := len(numStr)
+	windowSize := numBatteries - neededBatteries + 1
+	lastMaxIdx := -1
+	for i := 0; i < neededBatteries; i++ {
+		upperBoundary := int(math.Min(float64(i + windowSize), float64(numBatteries)))
+		idxMax := findIdxMaxDigit(numStr[lastMaxIdx + 1 : upperBoundary]) + i
+		sb.WriteString(string(numStr[idxMax]))
+		lastMaxIdx = idxMax
+	}
+	result, _ := strconv.Atoi(sb.String())
+	return result
 }
 
 func SolvePart1(filepath string) (int, error) {

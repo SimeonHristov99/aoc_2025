@@ -38,7 +38,7 @@ func TestFindIdxMaxDigit(t *testing.T) {
 }
 
 func TestFindMaxJoltage(t *testing.T) {
-	t.Run("when called then returns maximum joltage", func(t *testing.T) {
+	t.Run("when max digits at edges then returns maximum joltage", func(t *testing.T) {
 		// Arrange
 		input := "811111111111119"
 		expected := 89
