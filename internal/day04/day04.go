@@ -10,3 +10,7 @@ func parseInput(filepath string) []string {
 	lines := strings.Split(strings.TrimSpace(string(contents)), "\n")
 	return lines
 }
+
+func CoordsAreValid(row int, col int, numRows int, numCols int) bool {
+	return false
+}
