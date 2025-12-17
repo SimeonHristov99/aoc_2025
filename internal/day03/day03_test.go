@@ -52,9 +52,9 @@ func TestFindMaxJoltage(t *testing.T) {
 		}
 	})
 
-	t.Run("when max digits not at edges then returns maximum joltage", func(t *testing.T) {
+	t.Run("when left max digit not at edge then returns maximum joltage", func(t *testing.T) {
 		// Arrange
-		input := "111111181111911"
+		input := "1111111811119"
 		expected := 89
 
 		// Act
