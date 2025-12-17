@@ -134,4 +134,21 @@ func TestCoordsAreValid(t *testing.T) {
 			t.Fatalf("\nactual=\n%#v\nexpected=\n%#v\n", actual, expected)
 		}
 	})
+
+	t.Run("when row and column valid then returns true", func(t *testing.T) {
+		// Arrange
+		row := 5
+		col := 3
+		numRows := 10
+		numCols := 6
+		expected := true
+
+		// Act
+		actual := CoordsAreValid(row, col, numRows, numCols)
+
+		// Assert
+		if actual != expected {
+			t.Fatalf("\nactual=\n%#v\nexpected=\n%#v\n", actual, expected)
+		}
+	})
 }
