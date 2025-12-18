@@ -117,6 +117,20 @@ func TestUnionSize(t *testing.T) {
 		}
 	})
 
+	t.Run("when left is after right then returns union size without duplicates", func(t *testing.T) {
+		// Arrange
+		lhs := [2]int{8, 10}
+		rhs := [2]int{3, 5}
+		expected := 6
+
+		// Act
+		actual := unionSize(lhs, rhs)
+
+		// Assert
+		if actual != expected {
+			t.Fatalf("\nactual=\n%#v\nexpected=\n%#v\n", actual, expected)
+		}
+	})
 }
 
 func TestSolvePart1(t *testing.T) {
