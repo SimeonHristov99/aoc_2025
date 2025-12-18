@@ -37,3 +37,14 @@ func isFresh(ingredientRanges [][2]int, ingredientId int) bool {
 	}
 	return false
 }
+
+func SolvePart1(filepath string) (int, error) {
+	db := parseInput(filepath)
+	numFresh := 0
+	for _, ingredientId := range db.ingredientIds {
+		if isFresh(db.ingredientRanges, ingredientId) {
+			numFresh += 1
+		}
+	}
+	return numFresh, nil
+}
