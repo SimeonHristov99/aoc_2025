@@ -7,8 +7,8 @@ import (
 )
 
 type DB struct {
-	ingredientRange [][2]int
-	ingredientIds   []int
+	ingredientRanges [][2]int
+	ingredientIds    []int
 }
 
 func parseInput(filepath string) DB {
@@ -20,11 +20,20 @@ func parseInput(filepath string) DB {
 			entrySplit := strings.Split(entry, "-")
 			start, _ := strconv.Atoi(entrySplit[0])
 			end, _ := strconv.Atoi(entrySplit[1])
-			db.ingredientRange = append(db.ingredientRange, [2]int{start, end})
+			db.ingredientRanges = append(db.ingredientRanges, [2]int{start, end})
 		} else if len(entry) > 0 {
 			ingrId, _ := strconv.Atoi(entry)
 			db.ingredientIds = append(db.ingredientIds, ingrId)
 		}
 	}
 	return db
+}
+
+func isFresh(ingredientRanges [][2]int, ingredientId int) bool {
+	for _, ingredientRange := range ingredientRanges {
+		if ingredientRange[0] <= ingredientId && ingredientId <= ingredientRange[1] {
+			return true
+		}
+	}
+	return false
 }
