@@ -38,6 +38,10 @@ func isFresh(ingredientRanges [][2]int, ingredientId int) bool {
 	return false
 }
 
+func unionSize(lhs [2]int, rhs [2]int) int {
+	return lhs[1] - lhs[0] + 1 + rhs[1] - rhs[0] + 1
+}
+
 func SolvePart1(filepath string) (int, error) {
 	db := parseInput(filepath)
 	numFresh := 0
