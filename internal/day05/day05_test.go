@@ -71,6 +71,24 @@ func TestIsFresh(t *testing.T) {
 	})
 }
 
+func TestUnionSize(t *testing.T) {
+	t.Run("when no intersection then returns sum of elements", func(t *testing.T) {
+		// Arrange
+		lhs := [2]int{3, 5}
+		rhs := [2]int{6, 10}
+		expected := 8
+
+		// Act
+		actual := unionSize(lhs, rhs)
+
+		// Assert
+		if actual != expected {
+			t.Fatalf("\nactual=\n%#v\nexpected=\n%#v\n", actual, expected)
+		}
+	})
+
+}
+
 func TestSolvePart1(t *testing.T) {
 	t.Run("when called with sample then returns part one result", func(t *testing.T) {
 		// Arrange
