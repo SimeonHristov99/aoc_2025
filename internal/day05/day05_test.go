@@ -49,4 +49,24 @@ func TestIsFresh(t *testing.T) {
 			t.Fatalf("\nactual=\n%#v\nexpected=\n%#v\n", actual, expected)
 		}
 	})
+
+	t.Run("when not in range then returns false", func(t *testing.T) {
+		// Arrange
+		ingredientRanges := [][2]int{
+			{3, 5},
+			{10, 14},
+			{16, 20},
+			{12, 18},
+		}
+		ingredientId := 8
+		expected := false
+
+		// Act
+		actual := isFresh(ingredientRanges, ingredientId)
+
+		// Assert
+		if actual != expected {
+			t.Fatalf("\nactual=\n%#v\nexpected=\n%#v\n", actual, expected)
+		}
+	})
 }
