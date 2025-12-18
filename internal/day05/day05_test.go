@@ -87,6 +87,36 @@ func TestUnionSize(t *testing.T) {
 		}
 	})
 
+	t.Run("when intersection on the right then returns union size without duplicates", func(t *testing.T) {
+		// Arrange
+		lhs := [2]int{3, 5}
+		rhs := [2]int{4, 10}
+		expected := 8
+
+		// Act
+		actual := unionSize(lhs, rhs)
+
+		// Assert
+		if actual != expected {
+			t.Fatalf("\nactual=\n%#v\nexpected=\n%#v\n", actual, expected)
+		}
+	})
+
+	t.Run("when equal right element then returns union size without duplicates", func(t *testing.T) {
+		// Arrange
+		lhs := [2]int{3, 5}
+		rhs := [2]int{5, 10}
+		expected := 8
+
+		// Act
+		actual := unionSize(lhs, rhs)
+
+		// Assert
+		if actual != expected {
+			t.Fatalf("\nactual=\n%#v\nexpected=\n%#v\n", actual, expected)
+		}
+	})
+
 }
 
 func TestSolvePart1(t *testing.T) {
