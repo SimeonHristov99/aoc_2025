@@ -136,20 +136,39 @@ func TestUnionSize(t *testing.T) {
 func TestUnionize(t *testing.T) {
 	t.Run("when intervals not intersecting then return two intervals", func(t *testing.T) {
 		// Arrange
-		lhs := [2]int{8, 10}
-		rhs := [2]int{3, 5}
-		expectedLhs := [2]int{8, 10}
-		expectedRhs := [2]int{3, 5}
-		
+		lhs := [2]int{3, 5}
+		rhs := [2]int{8, 10}
+		expectedUnion := [2]int{3, 5}
+		expectedRemainder := [2]int{8, 10}
+
 		// Act
-		actualLhs, actualRhs := unionize(lhs, rhs)
+		actualUnion, actualRemainder := unionize(lhs, rhs)
 
 		// Assert
-		if !reflect.DeepEqual(actualLhs, expectedLhs) {
-			t.Fatalf("\nactualLhs=\n%#v\nexpectedLhs=\n%#v\n", actualLhs, expectedLhs)
+		if !reflect.DeepEqual(actualUnion, expectedUnion) {
+			t.Fatalf("\nactualUnion=\n%#v\nexpectedUnion=\n%#v\n", actualUnion, expectedUnion)
 		}
-		if !reflect.DeepEqual(actualRhs, expectedRhs) {
-			t.Fatalf("\nactualRhs=\n%#v\nexpectedRhs=\n%#v\n", actualRhs, expectedRhs)
+		if !reflect.DeepEqual(actualRemainder, expectedRemainder) {
+			t.Fatalf("\nactualRemainder=\n%#v\nexpectedRemainder=\n%#v\n", actualRemainder, expectedRemainder)
+		}
+	})
+
+	t.Run("when intersecting then returns one interval", func(t *testing.T) {
+		// Arrange
+		lhs := [2]int{3, 5}
+		rhs := [2]int{4, 10}
+		expectedUnion := [2]int{3, 10}
+		expectedRemainder := [2]int{}
+
+		// Act
+		actualUnion, actualRemainder := unionize(lhs, rhs)
+
+		// Assert
+		if !reflect.DeepEqual(actualUnion, expectedUnion) {
+			t.Fatalf("\nactualUnion=\n%#v\nexpectedUnion=\n%#v\n", actualUnion, expectedUnion)
+		}
+		if !reflect.DeepEqual(actualRemainder, expectedRemainder) {
+			t.Fatalf("\nactualRemainder=\n%#v\nexpectedRemainder=\n%#v\n", actualRemainder, expectedRemainder)
 		}
 	})
 }
