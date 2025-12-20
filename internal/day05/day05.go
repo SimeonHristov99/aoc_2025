@@ -1,7 +1,6 @@
 package day05
 
 import (
-	"fmt"
 	"os"
 	"strconv"
 	"strings"
@@ -44,7 +43,6 @@ func unionSize(lhs [2]int, rhs [2]int) int {
 		return unionSize(rhs, lhs)
 	}
 	if rhs[0] <= lhs[1] {
-		fmt.Println("left", lhs[1]-lhs[0]+1, "right", rhs[1], lhs[1]+1, rhs[1]-lhs[1]-1+1)
 		return lhs[1] - lhs[0] + 1 + rhs[1] - lhs[1] - 1 + 1
 	}
 	return lhs[1] - lhs[0] + 1 + rhs[1] - rhs[0] + 1
