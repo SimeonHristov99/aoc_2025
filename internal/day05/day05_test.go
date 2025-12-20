@@ -71,68 +71,6 @@ func TestIsFresh(t *testing.T) {
 	})
 }
 
-func TestUnionSize(t *testing.T) {
-	t.Run("when no intersection then returns sum of elements", func(t *testing.T) {
-		// Arrange
-		lhs := [2]int{3, 5}
-		rhs := [2]int{6, 10}
-		expected := 8
-
-		// Act
-		actual := unionSize(lhs, rhs)
-
-		// Assert
-		if actual != expected {
-			t.Fatalf("\nactual=\n%#v\nexpected=\n%#v\n", actual, expected)
-		}
-	})
-
-	t.Run("when intersection on the right then returns union size without duplicates", func(t *testing.T) {
-		// Arrange
-		lhs := [2]int{3, 5}
-		rhs := [2]int{4, 10}
-		expected := 8
-
-		// Act
-		actual := unionSize(lhs, rhs)
-
-		// Assert
-		if actual != expected {
-			t.Fatalf("\nactual=\n%#v\nexpected=\n%#v\n", actual, expected)
-		}
-	})
-
-	t.Run("when equal right element then returns union size without duplicates", func(t *testing.T) {
-		// Arrange
-		lhs := [2]int{3, 5}
-		rhs := [2]int{5, 10}
-		expected := 8
-
-		// Act
-		actual := unionSize(lhs, rhs)
-
-		// Assert
-		if actual != expected {
-			t.Fatalf("\nactual=\n%#v\nexpected=\n%#v\n", actual, expected)
-		}
-	})
-
-	t.Run("when left is after right then returns union size without duplicates", func(t *testing.T) {
-		// Arrange
-		lhs := [2]int{8, 10}
-		rhs := [2]int{3, 5}
-		expected := 6
-
-		// Act
-		actual := unionSize(lhs, rhs)
-
-		// Assert
-		if actual != expected {
-			t.Fatalf("\nactual=\n%#v\nexpected=\n%#v\n", actual, expected)
-		}
-	})
-}
-
 func TestUnionize(t *testing.T) {
 	t.Run("when intervals not intersecting then return two intervals", func(t *testing.T) {
 		// Arrange
@@ -153,11 +91,30 @@ func TestUnionize(t *testing.T) {
 		}
 	})
 
-	t.Run("when intersecting then returns one interval", func(t *testing.T) {
+	t.Run("when intersecting and right is more then returns one interval using upper bound of right", func(t *testing.T) {
 		// Arrange
 		lhs := [2]int{3, 5}
 		rhs := [2]int{4, 10}
 		expectedUnion := [2]int{3, 10}
+		expectedRemainder := [2]int{}
+
+		// Act
+		actualUnion, actualRemainder := unionize(lhs, rhs)
+
+		// Assert
+		if !reflect.DeepEqual(actualUnion, expectedUnion) {
+			t.Fatalf("\nactualUnion=\n%#v\nexpectedUnion=\n%#v\n", actualUnion, expectedUnion)
+		}
+		if !reflect.DeepEqual(actualRemainder, expectedRemainder) {
+			t.Fatalf("\nactualRemainder=\n%#v\nexpectedRemainder=\n%#v\n", actualRemainder, expectedRemainder)
+		}
+	})
+
+	t.Run("when intersecting and right is less then returns one interval using upper bound of left", func(t *testing.T) {
+		// Arrange
+		lhs := [2]int{3, 5}
+		rhs := [2]int{3, 4}
+		expectedUnion := [2]int{3, 5}
 		expectedRemainder := [2]int{}
 
 		// Act
