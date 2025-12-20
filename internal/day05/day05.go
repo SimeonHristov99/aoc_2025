@@ -56,6 +56,9 @@ func unionize(lhs [2]int, rhs [2]int) ([2]int, [2]int) {
 	if lhs[0] > rhs[0] {
 		return unionize(rhs, lhs)
 	}
+	// [x    ..    y]
+	//    [k    ..    l]
+	// return [x .. l], []
 	return [2]int{lhs[0], rhs[1]}, [2]int{}
 }
 
