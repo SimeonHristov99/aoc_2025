@@ -48,6 +48,10 @@ func unionize(lhs [2]int, rhs [2]int) ([2]int, [2]int) {
 	return [2]int{lhs[0], rhs[1]}, [2]int{}
 }
 
+func extendNonIntersecting(nonIntersectingIntervals [][2]int, interval [2]int) [][2]int {
+	return append(nonIntersectingIntervals, interval)
+}
+
 func SolvePart1(filepath string) (int, error) {
 	db := parseInput(filepath)
 	numFresh := 0
