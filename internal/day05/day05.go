@@ -49,8 +49,10 @@ func unionSize(lhs [2]int, rhs [2]int) int {
 }
 
 func unionize(lhs [2]int, rhs [2]int) ([2]int, [2]int) {
-	// if rhs[0] > lhs[0]
-	return lhs, rhs
+	if rhs[0] > lhs[1] {
+		return lhs, rhs
+	}
+	return [2]int{lhs[0], rhs[1]}, [2]int{}
 }
 
 func SolvePart1(filepath string) (int, error) {
