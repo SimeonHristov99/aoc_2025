@@ -133,6 +133,27 @@ func TestUnionSize(t *testing.T) {
 	})
 }
 
+func TestUnionize(t *testing.T) {
+	t.Run("when intervals not intersecting then return two intervals", func(t *testing.T) {
+		// Arrange
+		lhs := [2]int{8, 10}
+		rhs := [2]int{3, 5}
+		expectedLhs := [2]int{8, 10}
+		expectedRhs := [2]int{3, 5}
+		
+		// Act
+		actualLhs, actualRhs := unionize(lhs, rhs)
+
+		// Assert
+		if !reflect.DeepEqual(actualLhs, expectedLhs) {
+			t.Fatalf("\nactualLhs=\n%#v\nexpectedLhs=\n%#v\n", actualLhs, expectedLhs)
+		}
+		if !reflect.DeepEqual(actualRhs, expectedRhs) {
+			t.Fatalf("\nactualRhs=\n%#v\nexpectedRhs=\n%#v\n", actualRhs, expectedRhs)
+		}
+	})
+}
+
 func TestSolvePart1(t *testing.T) {
 	t.Run("when called with sample then returns part one result", func(t *testing.T) {
 		// Arrange
