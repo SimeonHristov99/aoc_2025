@@ -5,6 +5,7 @@ import (
 	"os"
 	"strconv"
 	"strings"
+	"slices"
 )
 
 type DB struct {
@@ -59,25 +60,29 @@ func unionize(lhs [2]int, rhs [2]int) ([2]int, [2]int) {
 }
 
 func extendNonIntersecting(nonIntersectingIntervals [][2]int, interval [2]int) [][2]int {
-	replacementMap := map[int][2]int{}
+	var newNonIntersectingIntervals [][2]int
+	var indicesToRemove []int
+	remainder := [2]int{0, 0}
 	for idx, currentInterval := range nonIntersectingIntervals {
-		union, remainder := unionize(currentInterval, interval)
-		fmt.Println("currentInterval", currentInterval, "interval", interval, "union", union, "remainder", remainder)
+		interval, remainder = unionize(currentInterval, interval)
 		if remainder == [2]int{0, 0} {
-			replacementMap[idx] = union
-			break
+			fmt.Println("Replacing", currentInterval, "with", interval)
+			indicesToRemove = append(indicesToRemove, idx)
+		}
+	}
+	
+	fmt.Println("indicesToRemove", indicesToRemove, "interval", interval)
+	for i := range nonIntersectingIntervals{
+		if !slices.Contains(indicesToRemove, i) {
+			newNonIntersectingIntervals = append(newNonIntersectingIntervals, nonIntersectingIntervals[i])
 		}
 	}
 
-	if len(replacementMap) == 0 {
-		return append(nonIntersectingIntervals, interval)
+	if len(indicesToRemove) > 0 {
+		newNonIntersectingIntervals = append(newNonIntersectingIntervals, interval)
 	}
 
-	for k, v := range replacementMap {
-		nonIntersectingIntervals[k] = v
-	}
-
-	return nonIntersectingIntervals
+	return newNonIntersectingIntervals
 }
 
 func SolvePart1(filepath string) (int, error) {
