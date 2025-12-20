@@ -60,6 +60,10 @@ func unionize(lhs [2]int, rhs [2]int) ([2]int, [2]int) {
 }
 
 func extendNonIntersecting(nonIntersectingIntervals [][2]int, interval [2]int) [][2]int {
+	if len(nonIntersectingIntervals) == 0 {
+		return append(nonIntersectingIntervals, interval)
+	}
+
 	var newNonIntersectingIntervals [][2]int
 	var indicesToRemove []int
 	remainder := [2]int{0, 0}
