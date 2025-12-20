@@ -128,6 +128,25 @@ func TestUnionize(t *testing.T) {
 			t.Fatalf("\nactualRemainder=\n%#v\nexpectedRemainder=\n%#v\n", actualRemainder, expectedRemainder)
 		}
 	})
+
+	t.Run("when intersecting and left starts later then returns one interval", func(t *testing.T) {
+		// Arrange
+		lhs := [2]int{3, 5}
+		rhs := [2]int{1, 4}
+		expectedUnion := [2]int{1, 5}
+		expectedRemainder := [2]int{}
+
+		// Act
+		actualUnion, actualRemainder := unionize(lhs, rhs)
+
+		// Assert
+		if !reflect.DeepEqual(actualUnion, expectedUnion) {
+			t.Fatalf("\nactualUnion=\n%#v\nexpectedUnion=\n%#v\n", actualUnion, expectedUnion)
+		}
+		if !reflect.DeepEqual(actualRemainder, expectedRemainder) {
+			t.Fatalf("\nactualRemainder=\n%#v\nexpectedRemainder=\n%#v\n", actualRemainder, expectedRemainder)
+		}
+	})
 }
 
 func TestExtendNonIntersecting(t *testing.T) {
