@@ -1,6 +1,7 @@
 package day05
 
 import (
+	"fmt"
 	"os"
 	"strconv"
 	"strings"
@@ -58,7 +59,25 @@ func unionize(lhs [2]int, rhs [2]int) ([2]int, [2]int) {
 }
 
 func extendNonIntersecting(nonIntersectingIntervals [][2]int, interval [2]int) [][2]int {
-	return append(nonIntersectingIntervals, interval)
+	replacementMap := map[int][2]int{}
+	for idx, currentInterval := range nonIntersectingIntervals {
+		union, remainder := unionize(currentInterval, interval)
+		fmt.Println("currentInterval", currentInterval, "interval", interval, "union", union, "remainder", remainder)
+		if remainder == [2]int{0, 0} {
+			replacementMap[idx] = union
+			break
+		}
+	}
+
+	if len(replacementMap) == 0 {
+		return append(nonIntersectingIntervals, interval)
+	}
+
+	for k, v := range replacementMap {
+		nonIntersectingIntervals[k] = v
+	}
+
+	return nonIntersectingIntervals
 }
 
 func SolvePart1(filepath string) (int, error) {
