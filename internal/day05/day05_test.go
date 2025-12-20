@@ -195,7 +195,7 @@ func TestExtendNonIntersecting(t *testing.T) {
 		}
 	})
 }
-	
+
 func TestSolvePart1(t *testing.T) {
 	t.Run("when called with sample then returns part one result", func(t *testing.T) {
 		// Arrange
