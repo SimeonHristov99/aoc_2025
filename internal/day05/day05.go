@@ -59,14 +59,11 @@ func unionize(lhs [2]int, rhs [2]int) ([2]int, [2]int) {
 	return [2]int{lhs[0], rhs[1]}, [2]int{}
 }
 
-func extendNonIntersecting(nonIntersectingIntervals [][2]int, interval [2]int) [][2]int {
-	if len(nonIntersectingIntervals) == 0 {
-		return append(nonIntersectingIntervals, interval)
-	}
-
+func extendNonIntersecting(nonIntersectingIntervals [][2]int, initialInterval [2]int) [][2]int {
 	var newNonIntersectingIntervals [][2]int
 	var indicesToRemove []int
 	var remainder [2]int
+	interval := initialInterval
 	for idx, currentInterval := range nonIntersectingIntervals {
 		interval, remainder = unionize(currentInterval, interval)
 		if remainder == [2]int{0, 0} {
@@ -80,7 +77,7 @@ func extendNonIntersecting(nonIntersectingIntervals [][2]int, interval [2]int) [
 		}
 	}
 
-	if len(indicesToRemove) > 0 {
+	if len(indicesToRemove) > 0 || interval == initialInterval {
 		newNonIntersectingIntervals = append(newNonIntersectingIntervals, interval)
 	}
 
