@@ -1,6 +1,7 @@
 package day05
 
 import (
+	"fmt"
 	"os"
 	"slices"
 	"sort"
@@ -63,10 +64,11 @@ func extendNonIntersecting(nonIntersectingIntervals [][2]int, interval [2]int) [
 	if len(nonIntersectingIntervals) == 0 {
 		return append(nonIntersectingIntervals, interval)
 	}
-	
+
 	var newNonIntersectingIntervals [][2]int
 	var indicesToRemove []int
 	var remainder [2]int
+	initialInterval := interval
 	for idx, currentInterval := range nonIntersectingIntervals {
 		interval, remainder = unionize(currentInterval, interval)
 		if remainder == [2]int{0, 0} {
@@ -80,8 +82,11 @@ func extendNonIntersecting(nonIntersectingIntervals [][2]int, interval [2]int) [
 		}
 	}
 
+	fmt.Println("newNonIntersectingIntervals", newNonIntersectingIntervals, "interval", interval, "indicesToRemove", indicesToRemove)
 	if len(indicesToRemove) > 0 {
 		newNonIntersectingIntervals = append(newNonIntersectingIntervals, interval)
+	} else {
+		newNonIntersectingIntervals = append(newNonIntersectingIntervals, initialInterval)
 	}
 
 	sort.SliceStable(newNonIntersectingIntervals, func(i, j int) bool { return newNonIntersectingIntervals[i][0] < newNonIntersectingIntervals[j][0] })
