@@ -1,11 +1,11 @@
 package day05
 
 import (
-	"fmt"
 	"os"
+	"slices"
+	"sort"
 	"strconv"
 	"strings"
-	"slices"
 )
 
 type DB struct {
@@ -66,17 +66,15 @@ func extendNonIntersecting(nonIntersectingIntervals [][2]int, interval [2]int) [
 
 	var newNonIntersectingIntervals [][2]int
 	var indicesToRemove []int
-	remainder := [2]int{0, 0}
+	var remainder [2]int
 	for idx, currentInterval := range nonIntersectingIntervals {
 		interval, remainder = unionize(currentInterval, interval)
 		if remainder == [2]int{0, 0} {
-			fmt.Println("Replacing", currentInterval, "with", interval)
 			indicesToRemove = append(indicesToRemove, idx)
 		}
 	}
-	
-	fmt.Println("indicesToRemove", indicesToRemove, "interval", interval)
-	for i := range nonIntersectingIntervals{
+
+	for i := range nonIntersectingIntervals {
 		if !slices.Contains(indicesToRemove, i) {
 			newNonIntersectingIntervals = append(newNonIntersectingIntervals, nonIntersectingIntervals[i])
 		}
@@ -86,6 +84,7 @@ func extendNonIntersecting(nonIntersectingIntervals [][2]int, interval [2]int) [
 		newNonIntersectingIntervals = append(newNonIntersectingIntervals, interval)
 	}
 
+	sort.SliceStable(newNonIntersectingIntervals, func(i, j int) bool { return newNonIntersectingIntervals[i][0] < newNonIntersectingIntervals[j][0] })
 	return newNonIntersectingIntervals
 }
 
