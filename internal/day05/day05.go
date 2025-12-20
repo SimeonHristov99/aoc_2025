@@ -38,19 +38,12 @@ func isFresh(ingredientRanges [][2]int, ingredientId int) bool {
 	return false
 }
 
-func unionSize(lhs [2]int, rhs [2]int) int {
-	if lhs[0] > rhs[0] {
-		return unionSize(rhs, lhs)
-	}
-	if rhs[0] <= lhs[1] {
-		return lhs[1] - lhs[0] + 1 + rhs[1] - lhs[1] - 1 + 1
-	}
-	return lhs[1] - lhs[0] + 1 + rhs[1] - rhs[0] + 1
-}
-
 func unionize(lhs [2]int, rhs [2]int) ([2]int, [2]int) {
 	if rhs[0] > lhs[1] {
 		return lhs, rhs
+	}
+	if rhs[1] < lhs[1] {
+		return [2]int{lhs[0], lhs[1]}, [2]int{}
 	}
 	return [2]int{lhs[0], rhs[1]}, [2]int{}
 }
