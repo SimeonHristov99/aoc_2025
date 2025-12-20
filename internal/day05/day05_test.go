@@ -194,6 +194,21 @@ func TestExtendNonIntersecting(t *testing.T) {
 			t.Fatalf("\nactual=\n%#v\nexpected=\n%#v\n", actual, expected)
 		}
 	})
+
+	t.Run("when interval not in any set then adds as new entry", func(t *testing.T) {
+		// Arrange
+		nonIntersectingIntervals := [][2]int{{5, 14}, {15, 18}}
+		interval := [2]int{1, 3}
+		expected := [][2]int{{1, 3}, {5, 14}, {15, 18}}
+
+		// Act
+		actual := extendNonIntersecting(nonIntersectingIntervals, interval)
+
+		// Assert
+		if !reflect.DeepEqual(actual, expected) {
+			t.Fatalf("\nactual=\n%#v\nexpected=\n%#v\n", actual, expected)
+		}
+	})
 }
 
 func TestSolvePart1(t *testing.T) {
