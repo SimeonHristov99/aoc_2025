@@ -70,9 +70,12 @@ func extendNonIntersecting(nonIntersectingIntervals [][2]int, interval [2]int) [
 	var remainder [2]int
 	initialInterval := interval
 	for idx, currentInterval := range nonIntersectingIntervals {
-		interval, remainder = unionize(currentInterval, interval)
+		// fmt.Println("currentInterval", currentInterval, "interval", interval)
+		interval, remainder = unionize(currentInterval, initialInterval)
+		fmt.Println("currentInterval", currentInterval, "initialInterval", initialInterval, " => interval", interval, "remainder", remainder)
 		if remainder == [2]int{0, 0} {
 			indicesToRemove = append(indicesToRemove, idx)
+			initialInterval = interval
 		}
 	}
 
@@ -82,7 +85,7 @@ func extendNonIntersecting(nonIntersectingIntervals [][2]int, interval [2]int) [
 		}
 	}
 
-	fmt.Println("newNonIntersectingIntervals", newNonIntersectingIntervals, "interval", interval, "indicesToRemove", indicesToRemove)
+	// fmt.Println("newNonIntersectingIntervals", newNonIntersectingIntervals, "interval", interval, "indicesToRemove", indicesToRemove)
 	if len(indicesToRemove) > 0 {
 		newNonIntersectingIntervals = append(newNonIntersectingIntervals, interval)
 	} else {
