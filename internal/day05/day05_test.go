@@ -209,6 +209,21 @@ func TestExtendNonIntersecting(t *testing.T) {
 			t.Fatalf("\nactual=\n%#v\nexpected=\n%#v\n", actual, expected)
 		}
 	})
+
+	t.Run("when intersecting two non intersecting then combines them", func(t *testing.T) {
+		// Arrange
+		nonIntersectingIntervals := [][2]int{{3, 5}, {10, 14}, {16, 20}}
+		interval := [2]int{12, 18}
+		expected := [][2]int{{3, 5}, {10, 20}}
+
+		// Act
+		actual := extendNonIntersecting(nonIntersectingIntervals, interval)
+
+		// Assert
+		if !reflect.DeepEqual(actual, expected) {
+			t.Fatalf("\nactual=\n%#v\nexpected=\n%#v\n", actual, expected)
+		}
+	})
 }
 
 func TestSolvePart1(t *testing.T) {
