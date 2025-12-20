@@ -1,7 +1,6 @@
 package day05
 
 import (
-	"fmt"
 	"os"
 	"slices"
 	"sort"
@@ -70,9 +69,7 @@ func extendNonIntersecting(nonIntersectingIntervals [][2]int, interval [2]int) [
 	var remainder [2]int
 	initialInterval := interval
 	for idx, currentInterval := range nonIntersectingIntervals {
-		// fmt.Println("currentInterval", currentInterval, "interval", interval)
 		interval, remainder = unionize(currentInterval, initialInterval)
-		fmt.Println("currentInterval", currentInterval, "initialInterval", initialInterval, " => interval", interval, "remainder", remainder)
 		if remainder == [2]int{0, 0} {
 			indicesToRemove = append(indicesToRemove, idx)
 			initialInterval = interval
@@ -85,7 +82,6 @@ func extendNonIntersecting(nonIntersectingIntervals [][2]int, interval [2]int) [
 		}
 	}
 
-	// fmt.Println("newNonIntersectingIntervals", newNonIntersectingIntervals, "interval", interval, "indicesToRemove", indicesToRemove)
 	if len(indicesToRemove) > 0 {
 		newNonIntersectingIntervals = append(newNonIntersectingIntervals, interval)
 	} else {
@@ -105,4 +101,17 @@ func SolvePart1(filepath string) (int, error) {
 		}
 	}
 	return numFresh, nil
+}
+
+func SolvePart2(filepath string) (int, error) {
+	db := parseInput(filepath)
+	totalFresh := 0
+	nonIntersectingIntervals := [][2]int{}
+	for _, interval := range db.ingredientRanges {
+		nonIntersectingIntervals = extendNonIntersecting(nonIntersectingIntervals, interval)
+	}
+	for _, interval := range nonIntersectingIntervals {
+		totalFresh += interval[1] - interval[0] + 1
+	}
+	return totalFresh, nil
 }
