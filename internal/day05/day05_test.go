@@ -130,6 +130,23 @@ func TestUnionize(t *testing.T) {
 	})
 }
 
+func TestExtendNonIntersecting(t *testing.T) {
+	t.Run("when list of non intersecting intervals empty then returns a list with the second argument", func(t *testing.T) {
+		// Arrange
+		var nonIntersectingIntervals [][2]int
+		interval := [2]int{5, 14}
+		expected := [][2]int{{5, 14}}
+
+		// Act
+		actual := extendNonIntersecting(nonIntersectingIntervals, interval)
+
+		// Assert
+		if !reflect.DeepEqual(actual, expected) {
+			t.Fatalf("\nactual=\n%#v\nexpected=\n%#v\n", actual, expected)
+		}
+	})
+}
+
 func TestSolvePart1(t *testing.T) {
 	t.Run("when called with sample then returns part one result", func(t *testing.T) {
 		// Arrange
