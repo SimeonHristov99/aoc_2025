@@ -27,3 +27,21 @@ func parseInput(filepath string) ([][]int, []func(int, int) int) {
 	}
 	return values, ops
 }
+
+func SolvePart1(filepath string) (int, error) {
+	values, ops := parseInput(filepath)
+	opsResults := []int{}
+	for _, initial := range values[0] {
+		opsResults = append(opsResults, initial)
+	}
+	for i := 1; i < len(values); i++ {
+		for j, n := range values[i] {
+			opsResults[j] = ops[j](opsResults[j], n)
+		}
+	}
+	grandTotal := 0
+	for _, total := range opsResults {
+		grandTotal += total
+	}
+	return grandTotal, nil
+}
