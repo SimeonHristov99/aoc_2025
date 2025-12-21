@@ -32,7 +32,7 @@ func TestParseInput(t *testing.T) {
 			t.Fatalf("\nactualValues=\n%#v\nexpectedValues=\n%#v\n", actualValues, expectedValues)
 		}
 		for i := range expectedOpResults {
-			if !(expectedOpResults[i][2] == expectedOpResults[i][3]) {
+			if expectedOpResults[i][2] != expectedOpResults[i][3] {
 				t.Fatalf("\nactual=\n%#v\nexpected=\n%#v\n", expectedOpResults[i][2], expectedOpResults[i][3])
 			}
 		}
