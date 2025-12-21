@@ -18,7 +18,7 @@ func parseInput(filepath string) ([][]int, []func(int, int) int) {
 			values[i] = append(values[i], numInt)
 		}
 	}
-	for _, charOp := range strings.Fields(lines[len(lines)-1]) {
+	for charOp := range strings.FieldsSeq(lines[len(lines)-1]) {
 		if charOp == "+" {
 			ops = append(ops, func(i int, j int) int { return i + j })
 		} else {
@@ -30,10 +30,7 @@ func parseInput(filepath string) ([][]int, []func(int, int) int) {
 
 func SolvePart1(filepath string) (int, error) {
 	values, ops := parseInput(filepath)
-	opsResults := []int{}
-	for _, initial := range values[0] {
-		opsResults = append(opsResults, initial)
-	}
+	opsResults := values[0]
 	for i := 1; i < len(values); i++ {
 		for j, n := range values[i] {
 			opsResults[j] = ops[j](opsResults[j], n)
