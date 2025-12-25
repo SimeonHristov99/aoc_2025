@@ -72,3 +72,20 @@ func SolvePart1(filepath string) (int, error) {
 	}
 	return grandTotal, nil
 }
+
+func SolvePart2(filepath string) (int, error) {
+	valuesStr, ops := parseInput(filepath)
+	values := parseNumsViaColumns(valuesStr)
+	opsResults := []int{}
+	for i := 0; i < len(values); i++ {
+		opsResults = append(opsResults, values[i][0])
+		for j := 1; j < len(values[0]); j++ {
+			opsResults[i] = ops[i](opsResults[i], values[i][j])
+		}
+	}
+	grandTotal := 0
+	for _, total := range opsResults {
+		grandTotal += total
+	}
+	return grandTotal, nil
+}
