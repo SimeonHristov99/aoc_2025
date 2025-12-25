@@ -5,6 +5,22 @@ import (
 	"testing"
 )
 
+func TestParseNumToInt(t *testing.T) {
+	t.Run("when called then returns parsed integer", func(t *testing.T) {
+		// Arrange
+		num := "43"
+		expected := 43
+
+		// Act
+		actual := parseNumToInt(num)
+
+		// Assert
+		if actual != expected {
+			t.Fatalf("\nactual=\n%#v\nexpected=\n%#v\n", actual, expected)
+		}
+	})
+}
+
 func TestParseInput(t *testing.T) {
 	t.Run("when called then returns the values and operations", func(t *testing.T) {
 		// Arrange
