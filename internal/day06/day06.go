@@ -6,6 +6,11 @@ import (
 	"strings"
 )
 
+func parseNumToInt(num string) int {
+	numInt, _ := strconv.Atoi(num)
+	return numInt
+}
+
 func parseInput(filepath string) ([][]int, []func(int, int) int) {
 	content, _ := os.ReadFile(filepath)
 	lines := strings.Split(strings.Trim(string(content), "\n"), "\n")
@@ -14,8 +19,7 @@ func parseInput(filepath string) ([][]int, []func(int, int) int) {
 	for i := range len(lines) - 1 {
 		values = append(values, []int{})
 		for num := range strings.FieldsSeq(lines[i]) {
-			numInt, _ := strconv.Atoi(num)
-			values[i] = append(values[i], numInt)
+			values[i] = append(values[i], parseNumToInt(num))
 		}
 	}
 	for charOp := range strings.FieldsSeq(lines[len(lines)-1]) {
