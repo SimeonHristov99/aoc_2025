@@ -144,4 +144,22 @@ func TestSolvePart2(t *testing.T) {
 			t.Fatalf("\nactual=\n%#v\nexpected=\n%#v\n", actual, expected)
 		}
 	})
+
+	t.Run("when processing row then uses range of that row", func(t *testing.T) {
+		// Arrange
+		expected := 82
+		var expectedError error = nil
+		file := "sample_diff_lens.txt"
+
+		// Act
+		actual, actualError := SolvePart2(file)
+
+		// Assert
+		if actualError != expectedError {
+			t.Fatalf("\nactual=\n%#v\nexpected=\n%#v\n", actualError, expectedError)
+		}
+		if actual != expected {
+			t.Fatalf("\nactual=\n%#v\nexpected=\n%#v\n", actual, expected)
+		}
+	})
 }
