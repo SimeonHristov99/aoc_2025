@@ -79,7 +79,7 @@ func SolvePart2(filepath string) (int, error) {
 	opsResults := []int{}
 	for i := 0; i < len(values); i++ {
 		opsResults = append(opsResults, values[i][0])
-		for j := 1; j < len(values[0]); j++ {
+		for j := 1; j < len(values[i]); j++ {
 			opsResults[i] = ops[i](opsResults[i], values[i][j])
 		}
 	}
