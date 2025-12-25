@@ -63,6 +63,30 @@ func TestParseInput(t *testing.T) {
 	})
 }
 
+func TestParseNumsViaColumns(t *testing.T) {
+	t.Run("when called then returns a matrix with the numbers for the operations", func(t *testing.T) {
+		// Arrange
+		nums := []string{
+			"123 328  51 64 ",
+			" 45 64  387 23 ",
+			"  6 98  215 314",
+		}
+		expected := [][]int{
+			{1, 24, 356},
+			{369, 248, 8},
+			{32, 581, 175},
+			{623, 431, 4},
+		}
+
+		// Act
+		actual := parseNumsViaColumns(nums)
+
+		// Assert
+		if !reflect.DeepEqual(actual, expected) {
+			t.Fatalf("\nactual=\n%#v\nexpected=\n%#v\n", actual, expected)
+		}
+	})
+}
 func TestSolvePart1(t *testing.T) {
 	t.Run("when called with sample then returns part one result", func(t *testing.T) {
 		// Arrange
