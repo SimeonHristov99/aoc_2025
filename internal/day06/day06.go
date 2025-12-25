@@ -77,7 +77,7 @@ func SolvePart2(filepath string) (int, error) {
 	valuesStr, ops := parseInput(filepath)
 	values := parseNumsViaColumns(valuesStr)
 	opsResults := []int{}
-	for i := 0; i < len(values); i++ {
+	for i := range values {
 		opsResults = append(opsResults, values[i][0])
 		for j := 1; j < len(values[i]); j++ {
 			opsResults[i] = ops[i](opsResults[i], values[i][j])
