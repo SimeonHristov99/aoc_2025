@@ -36,6 +36,27 @@ func parseInput(filepath string) ([]string, []func(int, int) int) {
 	return values, ops
 }
 
+func parseNumsViaColumns(nums []string) [][]int {
+	var additivesPerCol [][]int
+	additivesPerCol = append(additivesPerCol, []int{})
+	rowIdx := 0
+	for j := 0; j < len(nums[0]); j++ {
+		var colNum strings.Builder
+		for i := range nums {
+			colNum.WriteString(string(nums[i][j]))
+		}
+		colNumStr := strings.TrimSpace(colNum.String())
+		if len(colNumStr) > 0 {
+			num, _ := strconv.Atoi(colNumStr)
+			additivesPerCol[rowIdx] = append(additivesPerCol[rowIdx], num)
+		} else {
+			additivesPerCol = append(additivesPerCol, []int{})
+			rowIdx++
+		}
+	}
+	return additivesPerCol
+}
+
 func SolvePart1(filepath string) (int, error) {
 	valuesStr, ops := parseInput(filepath)
 	values := parseNumsToInts(valuesStr)
