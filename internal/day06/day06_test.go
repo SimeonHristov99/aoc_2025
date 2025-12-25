@@ -5,30 +5,38 @@ import (
 	"testing"
 )
 
-func TestParseNumToInt(t *testing.T) {
-	t.Run("when called then returns parsed integer", func(t *testing.T) {
+func TestParseNumsToInts(t *testing.T) {
+	t.Run("when called then parses matrix with strings to integers", func(t *testing.T) {
 		// Arrange
-		num := "43"
-		expected := 43
+		nums := []string{
+			"123 328  51 64 ",
+			" 45 64  387 23 ",
+			"  6 98  215 314",
+		}
+		expected := [][]int{
+			{123, 328, 51, 64},
+			{45, 64, 387, 23},
+			{6, 98, 215, 314},
+		}
 
 		// Act
-		actual := parseNumToInt(num)
+		actual := parseNumsToInts(nums)
 
 		// Assert
-		if actual != expected {
+		if !reflect.DeepEqual(actual, expected) {
 			t.Fatalf("\nactual=\n%#v\nexpected=\n%#v\n", actual, expected)
 		}
 	})
 }
 
 func TestParseInput(t *testing.T) {
-	t.Run("when called then returns the values and operations", func(t *testing.T) {
+	t.Run("when called then returns the values as strings and operations as functions", func(t *testing.T) {
 		// Arrange
 		filepath := "sample.txt"
-		expectedValues := [][]int{
-			{123, 328, 51, 64},
-			{45, 64, 387, 23},
-			{6, 98, 215, 314},
+		expectedValues := []string{
+			"123 328  51 64 ",
+			" 45 64  387 23 ",
+			"  6 98  215 314",
 		}
 		expectedOpResults := [4][4]int{
 			{2, 3, 6, -1},

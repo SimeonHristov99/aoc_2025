@@ -6,21 +6,25 @@ import (
 	"strings"
 )
 
-func parseNumToInt(num string) int {
-	numInt, _ := strconv.Atoi(num)
-	return numInt
+func parseNumsToInts(nums []string) [][]int {
+	values := [][]int{}
+	for i := range len(nums) {
+		values = append(values, []int{})
+		for num := range strings.FieldsSeq(nums[i]) {
+			num, _ := strconv.Atoi(num)
+			values[i] = append(values[i], num)
+		}
+	}
+	return values
 }
 
-func parseInput(filepath string) ([][]int, []func(int, int) int) {
+func parseInput(filepath string) ([]string, []func(int, int) int) {
 	content, _ := os.ReadFile(filepath)
 	lines := strings.Split(strings.Trim(string(content), "\n"), "\n")
-	values := [][]int{}
+	var values []string
 	ops := []func(int, int) int{}
 	for i := range len(lines) - 1 {
-		values = append(values, []int{})
-		for num := range strings.FieldsSeq(lines[i]) {
-			values[i] = append(values[i], parseNumToInt(num))
-		}
+		values = append(values, lines[i])
 	}
 	for charOp := range strings.FieldsSeq(lines[len(lines)-1]) {
 		if charOp == "+" {
@@ -33,7 +37,8 @@ func parseInput(filepath string) ([][]int, []func(int, int) int) {
 }
 
 func SolvePart1(filepath string) (int, error) {
-	values, ops := parseInput(filepath)
+	valuesStr, ops := parseInput(filepath)
+	values := parseNumsToInts(valuesStr)
 	opsResults := values[0]
 	for i := 1; i < len(values); i++ {
 		for j, n := range values[i] {
