@@ -16,4 +16,5 @@ Example: `go run cmd/main.go -day 3 -part 2 -input internal/day03/input.txt`
 - [X] Solve day 3.
 - [X] Solve day 4.
 - [X] Solve day 5.
-- [ ] Solve day 6.
+- [X] Solve day 6.
+- [ ] Solve day 7.
