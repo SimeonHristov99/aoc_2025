@@ -58,6 +58,7 @@ func main() {
 		},
 		6: {
 			1: day06.SolvePart1,
+			2: day06.SolvePart2,
 		},
 	}
 	config, _ := parseArgs(os.Args[1:])
