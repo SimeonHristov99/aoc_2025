@@ -33,8 +33,6 @@ func SolvePart1(filepath string) (int, error) {
 			nextRight := [2]int{i + 1, j + 1}
 			if !slices.Contains(queue, nextLeft) && !slices.Contains(queue, nextRight) {
 				queue = append(queue, nextLeft, nextRight)
-			} else if !slices.Contains(queue, nextLeft) {
-				queue = append(queue, nextLeft)
 			} else if !slices.Contains(queue, nextRight) {
 				queue = append(queue, nextRight)
 			} else {
