@@ -19,10 +19,9 @@ func parseInput(filepath string) (Timeline, []string) {
 	return Timeline{0, colIdx, 1}, manifold
 }
 
-func SolvePart1(filepath string) (int, error) {
-	startTimeline, manifold := parseInput(filepath)
-	numRows := len(manifold)
+func doBFS(startTimeline Timeline, manifold []string) (int, error) {
 	queue := []Timeline{startTimeline}
+	numRows := len(manifold)
 	numSplits := 0
 	for len(queue) > 0 {
 		current := queue[0]
@@ -49,4 +48,10 @@ func SolvePart1(filepath string) (int, error) {
 		}
 	}
 	return numSplits, nil
+}
+
+func SolvePart1(filepath string) (int, error) {
+	startTimeline, manifold := parseInput(filepath)
+	numSplits, err := doBFS(startTimeline, manifold)
+	return numSplits, err
 }

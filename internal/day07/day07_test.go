@@ -46,6 +46,48 @@ func TestParseInput(t *testing.T) {
 	})
 }
 
+func TestDoBFS(t *testing.T) {
+	t.Run("when called then does BFS", func(t *testing.T) {
+		// Arrange
+		startTimeline := Timeline{
+			x:  0,
+			y:  7,
+			id: 1,
+		}
+		manifold := []string{
+			".......S.......",
+			"...............",
+			".......^.......",
+			"...............",
+			"......^.^......",
+			"...............",
+			".....^.^.^.....",
+			"...............",
+			"....^.^...^....",
+			"...............",
+			"...^.^...^.^...",
+			"...............",
+			"..^...^.....^..",
+			"...............",
+			".^.^.^.^.^...^.",
+			"...............",
+		}
+		var expectedError error = nil
+		expectedSplits := 21
+
+		// Act
+		actualSplits, actualError := doBFS(startTimeline, manifold)
+
+		// Assert
+		if actualSplits != expectedSplits {
+			t.Fatalf("\nactualSplits=\n%#v\nexpectedSplits=\n%#v\n", actualSplits, expectedSplits)
+		}
+		if actualError != expectedError {
+			t.Fatalf("\nactual=\n%#v\nexpected=\n%#v\n", actualError, expectedError)
+		}
+	})
+}
+
 func TestSolvePart1(t *testing.T) {
 	t.Run("when called with sample then returns part one result", func(t *testing.T) {
 		// Arrange
