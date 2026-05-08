@@ -6,21 +6,27 @@ import (
 	"strings"
 )
 
-func parseInput(filepath string) ([2]int, []string) {
+type Timeline struct {
+	x  int
+	y  int
+	id int
+}
+
+func parseInput(filepath string) (Timeline, []string) {
 	contents, _ := os.ReadFile(filepath)
 	manifold := strings.Split(strings.Trim(string(contents), "\n"), "\n")
 	colIdx := strings.Index(string(manifold[0]), "S")
-	return [2]int{0, colIdx}, manifold
+	return Timeline{0, colIdx, 1}, manifold
 }
 
 func SolvePart1(filepath string) (int, error) {
-	startCoords, manifold := parseInput(filepath)
+	startTimeline, manifold := parseInput(filepath)
 	numRows := len(manifold)
-	queue := [][2]int{startCoords}
+	queue := []Timeline{startTimeline}
 	numSplits := 0
 	for len(queue) > 0 {
 		current := queue[0]
-		i, j := current[0], current[1]
+		i, j := current.x, current.y
 		queue = queue[1:]
 
 		if i+1 >= numRows {
@@ -29,8 +35,8 @@ func SolvePart1(filepath string) (int, error) {
 
 		if string(manifold[i+1][j]) == "^" {
 			numSplits++
-			nextLeft := [2]int{i + 1, j - 1}
-			nextRight := [2]int{i + 1, j + 1}
+			nextLeft := Timeline{i + 1, j - 1, 1}
+			nextRight := Timeline{i + 1, j + 1, 1}
 			if !slices.Contains(queue, nextLeft) && !slices.Contains(queue, nextRight) {
 				queue = append(queue, nextLeft, nextRight)
 			} else if !slices.Contains(queue, nextRight) {
@@ -39,7 +45,7 @@ func SolvePart1(filepath string) (int, error) {
 				numSplits--
 			}
 		} else {
-			queue = append(queue, [2]int{i + 1, j})
+			queue = append(queue, Timeline{i + 1, j, 1})
 		}
 	}
 	return numSplits, nil
