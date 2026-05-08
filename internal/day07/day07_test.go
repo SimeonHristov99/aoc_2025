@@ -9,7 +9,11 @@ func TestParseInput(t *testing.T) {
 	t.Run("when called then returns start coords and map", func(t *testing.T) {
 		// Arrange
 		filepath := "sample.txt"
-		expectedStartCoords := [2]int{0, 7}
+		expectedTimeline := Timeline{
+			x:  0,
+			y:  7,
+			id: 1,
+		}
 		expectedMap := []string{
 			".......S.......",
 			"...............",
@@ -30,14 +34,14 @@ func TestParseInput(t *testing.T) {
 		}
 
 		// Act
-		actualStartCoords, actualMap := parseInput(filepath)
+		actualTimeline, actualMap := parseInput(filepath)
 
 		// Assert
 		if !reflect.DeepEqual(actualMap, expectedMap) {
 			t.Fatalf("\nactualMap=\n%#v\nexpectedMap=\n%#v\n", actualMap, expectedMap)
 		}
-		if actualStartCoords != expectedStartCoords {
-			t.Fatalf("\nactualStartCoords=\n%#v\nexpectedStartCoords=\n%#v\n", actualStartCoords, expectedStartCoords)
+		if !reflect.DeepEqual(actualTimeline, expectedTimeline) {
+			t.Fatalf("\nactualTimeline=\n%#v\nexpectedTimeline=\n%#v\n", actualTimeline, expectedTimeline)
 		}
 	})
 }
